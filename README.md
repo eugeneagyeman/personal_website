@@ -94,7 +94,8 @@ Add a `wrangler.jsonc` at the project root. Omit `main` because there is no Work
   "name": "personal-website",
   "compatibility_date": "2026-09-29",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "not_found_handling": "404-page"
   }
 }
 ```
@@ -109,8 +110,16 @@ npx wrangler deploy
 
 A custom domain is attached under **Workers & Pages** in the dashboard.
 
-Two gaps to be aware of:
+### Headers and redirects
 
-- There is no `404.html`, so unmatched routes return Cloudflare's default 404 rather than a styled page. Add `src/pages/404.astro` and set `assets.not_found_handling` to `"404-page"` to fix it.
-- `_headers` and `_redirects` are not used, so there are currently no cache-control or security headers. Those files go in `public/` and are picked up automatically.
+`public/_headers` is deployed automatically and sets security headers on every response, plus a one-year immutable `Cache-Control` on `/_astro/` where Astro's fingerprinted assets live.
+
+Two things to know before editing it:
+
+- A request matching several rules inherits headers from all of them, and **a header declared twice has its values joined with a comma**. Each header belongs in exactly one rule.
+- The `Content-Security-Policy` allows the two inline scripts by SHA-256 hash rather than using `unsafe-inline`. Those hashes are tied to the exact script text, so if you change the theme script in `Layout.astro` or the toggle in `ThemeToggle.astro`, regenerate them or the site will fail to boot with a CSP violation. A failing check in the browser console looks like `Refused to execute inline script`.
+
+There is no `_redirects` file because nothing needs redirecting. Cloudflare handles the HTTP to HTTPS upgrade itself, and the site has no moved or renamed URLs.
+
+To serve the styled 404 page, `assets.not_found_handling` is set to `"404-page"`, which serves `dist/404.html`.
 
