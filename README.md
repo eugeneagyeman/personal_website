@@ -139,12 +139,18 @@ npx wrangler deploy --dry-run
 
 `.github/workflows/deploy.yml` builds and deploys on every push to `main`. It needs two repository secrets:
 
-| Secret                    | Value                                                     |
-| :------------------------ | :-------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`    | A Cloudflare API token with Workers Scripts:Edit          |
-| `CLOUDFLARE_ACCOUNT_ID`   | The Cloudflare account ID, shown at the top of wrangler output |
+| Secret                  | Value                                              |
+| :---------------------- | :------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | A Cloudflare API token with Workers Scripts:Edit   |
+| `CLOUDFLARE_ACCOUNT_ID` | The Cloudflare account ID                          |
 
-A custom domain is attached under **Workers & Pages** in the dashboard.
+`CLOUDFLARE_ACCOUNT_ID` is already set. The API token has to be created in the Cloudflare dashboard under **My Profile**, API Tokens, using the **Edit Cloudflare Workers** template, then added with:
+
+```sh
+gh secret set CLOUDFLARE_API_TOKEN
+```
+
+The workflow uses `npm install` rather than `npm ci`. The lock file is generated on macOS and so does not contain the linux-x64 variants of the optional native dependencies Tailwind pulls in, which makes `npm ci` fail on a Linux runner with `Missing: @emnapi/core from lock file`. npm has no supported way to write a lock file covering every platform.
 
 ### Headers and redirects
 
