@@ -86,19 +86,19 @@ Requirements to deploy:
 - Node 22.12+ (already required by Astro)
 - `wrangler`, already in `devDependencies`
 
-`wrangler.jsonc` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play.
+`wrangler.toml` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play.
 
-```jsonc
-{
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "personal-website",
-  "compatibility_date": "2026-09-29",
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page"
-  }
-}
+```toml
+"$schema" = "./node_modules/wrangler/config-schema.json"
+name = "personal-website"
+compatibility_date = "2026-09-29"
+
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
 ```
+
+Wrangler also accepts `wrangler.jsonc`. Cloudflare recommends the JSON form for new projects because some newer features are JSON-only, but this site uses nothing that needs them.
 
 Then build and deploy:
 
