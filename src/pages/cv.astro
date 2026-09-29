@@ -94,7 +94,8 @@ const skillGroups = [
 				Curriculum Vitae
 			</p>
 			<button
-				onclick="window.print()"
+				id="print-cv"
+				type="button"
 				class="inline-flex items-center gap-2 rounded-full bg-white dark:bg-white px-5 py-2.5 text-sm font-medium text-electric-deep dark:text-slate-900 hover:bg-white/85 dark:hover:bg-slate-200 transition-colors"
 			>
 				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -261,4 +262,10 @@ const skillGroups = [
 			}
 		}
 	</style>
+
+	<script>
+		document.getElementById('print-cv')?.addEventListener('click', () => {
+			window.print();
+		});
+	</script>
 </Layout>
