@@ -86,34 +86,63 @@ Requirements to deploy:
 - Node 22.12+ (already required by Astro)
 - `wrangler`, already in `devDependencies`
 
-`wrangler.toml` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play.
+`wrangler.jsonc` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play. `workers_dev` is `false` because the site is served from a custom domain rather than a `workers.dev` URL.
 
-```toml
-"$schema" = "./node_modules/wrangler/config-schema.json"
-name = "personal-website"
-compatibility_date = "2026-09-29"
-
-[assets]
-directory = "./dist"
-not_found_handling = "404-page"
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "personal-website",
+  "compatibility_date": "2026-09-29",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "persist": true
+    }
+  }
+}
 ```
 
-Wrangler also accepts `wrangler.jsonc`. Cloudflare recommends the JSON form for new projects because some newer features are JSON-only, but this site uses nothing that needs them.
+Invocation logs are persisted on the Workers Free plan, which is enough for a site this size. If the volume ever becomes worth reducing, lower `head_sampling_rate`.
 
-Then build and deploy:
+Wrangler also accepts `wrangler.toml`. Cloudflare recommends the JSON form for new projects because some newer features are JSON-only, and the `observability` block above is the reason to prefer it here.
+
+### Deploying
+
+Pushing to `main` deploys automatically through GitHub Actions. To deploy by hand:
 
 ```sh
 npx wrangler login
 npm run deploy
 ```
 
-Authentication is per machine. `npx wrangler login` opens a browser and stores credentials, or set `CLOUDFLARE_API_TOKEN` in the environment for CI.
+Authentication is per machine. `npx wrangler login` opens a browser and stores credentials, or set `CLOUDFLARE_API_TOKEN` in the environment.
 
 To check the configuration without uploading anything, and without being logged in:
 
 ```sh
 npx wrangler deploy --dry-run
 ```
+
+### CI
+
+`.github/workflows/deploy.yml` builds and deploys on every push to `main`. It needs two repository secrets:
+
+| Secret                    | Value                                                     |
+| :------------------------ | :-------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`    | A Cloudflare API token with Workers Scripts:Edit          |
+| `CLOUDFLARE_ACCOUNT_ID`   | The Cloudflare account ID, shown at the top of wrangler output |
 
 A custom domain is attached under **Workers & Pages** in the dashboard.
 
