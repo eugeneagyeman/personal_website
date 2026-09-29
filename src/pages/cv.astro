@@ -93,9 +93,9 @@ const skillGroups = [
 			<p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/80 dark:text-cyan-500">
 				Curriculum Vitae
 			</p>
-			<button
-				id="print-cv"
-				type="button"
+			<a
+				href="/eugene-agyeman-cv.pdf"
+				download="eugene-agyeman-cv.pdf"
 				class="inline-flex items-center gap-2 rounded-full bg-white dark:bg-white px-5 py-2.5 text-sm font-medium text-electric-deep dark:text-slate-900 hover:bg-white/85 dark:hover:bg-slate-200 transition-colors"
 			>
 				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -103,7 +103,7 @@ const skillGroups = [
 						d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg
 				>
 				Download PDF
-			</button>
+			</a>
 		</div>
 
 		<article
@@ -262,10 +262,4 @@ const skillGroups = [
 			}
 		}
 	</style>
-
-	<script>
-		document.getElementById('print-cv')?.addEventListener('click', () => {
-			window.print();
-		});
-	</script>
 </Layout>

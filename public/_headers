@@ -8,7 +8,7 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'sha256-3swV7pI3GPKLRfNyMJ/iZXscQesdAs5xN0b3EhaL768=' 'sha256-5MYmXr6IqIgaYF4bo2+KSJSv46RFZm/d7VJZb29oLo8=' 'sha256-LRFpTj3eXVaYLeMqX97lKrwaaH12jIczyJ60Br/brps=' 'sha256-iuNwqnw91sdLXqAUrtmc4BLCjPb8u0CTzsPSDQYDW7E='
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'sha256-3swV7pI3GPKLRfNyMJ/iZXscQesdAs5xN0b3EhaL768=' 'sha256-5MYmXr6IqIgaYF4bo2+KSJSv46RFZm/d7VJZb29oLo8=' 'sha256-LRFpTj3eXVaYLeMqX97lKrwaaH12jIczyJ60Br/brps='
 
 
 # Astro fingerprints everything in /_astro, so these URLs change whenever their

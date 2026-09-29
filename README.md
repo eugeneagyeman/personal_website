@@ -65,9 +65,13 @@ The blog index is currently a placeholder while the section is being written.
 
 Design tokens live in the `@theme` block in `src/styles/global.css`. Dark mode is class-based rather than following the OS preference, set by an inline script in `Layout.astro` to avoid a flash of the wrong theme.
 
-## Deploying
+## The CV PDF
 
-The build output in `dist/` is a folder of static files with no server-side component, so it can be served from anywhere. The site is intended to be hosted on Cloudflare Workers. There is no CI pipeline yet.
+`public/eugene-agyeman-cv.pdf` is the downloadable version of the CV. Its LaTeX source is kept in Overleaf rather than in this repository, so the PDF is committed here as the exported artefact. To update it, re-export from Overleaf and replace the file in `public/`.
+
+Astro copies `public/` into the build, so the PDF is served from `/eugene-agyeman-cv.pdf` with no extra configuration. The `Download PDF` button on `/cv` is a plain link to it, so it works with JavaScript disabled.
+
+The HTML version at `/cv` and the PDF are written to describe the same experience. They are maintained separately, so they can drift apart if one is updated without the other.
 
 ### Cloudflare Workers
 
