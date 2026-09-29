@@ -27,10 +27,15 @@ jobs:
           node-version: '22'
           cache: npm
 
+      # `npm install` rather than `npm ci`. The lock file is generated on macOS,
+      # so it does not contain the linux-x64 variants of the optional native
+      # dependencies that Tailwind pulls in, and `npm ci` fails on them with
+      # "Missing: @emnapi/core from lock file". npm has no supported way to
+      # generate a lock file covering every platform.
       - name: Install dependencies
         run: |
           npm install --global npm@11
-          npm ci
+          npm install
 
       - name: Build
         run: npm run build
