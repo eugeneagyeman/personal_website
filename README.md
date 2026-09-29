@@ -1,4 +1,4 @@
-# personal_website
+# Personal Website
 
 Source for my personal site, a small static site built with [Astro](https://astro.build).
 
