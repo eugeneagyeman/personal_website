@@ -84,9 +84,9 @@ Requirements to deploy:
 
 - A Cloudflare account, free tier is sufficient
 - Node 22.12+ (already required by Astro)
-- `wrangler` as a dev dependency
+- `wrangler`, already in `devDependencies`
 
-Add a `wrangler.jsonc` at the project root. Omit `main` because there is no Worker script:
+`wrangler.jsonc` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play.
 
 ```jsonc
 {
@@ -103,9 +103,16 @@ Add a `wrangler.jsonc` at the project root. Omit `main` because there is no Work
 Then build and deploy:
 
 ```sh
-npm install --save-dev wrangler
-npm run build
-npx wrangler deploy
+npx wrangler login
+npm run deploy
+```
+
+Authentication is per machine. `npx wrangler login` opens a browser and stores credentials, or set `CLOUDFLARE_API_TOKEN` in the environment for CI.
+
+To check the configuration without uploading anything, and without being logged in:
+
+```sh
+npx wrangler deploy --dry-run
 ```
 
 A custom domain is attached under **Workers & Pages** in the dashboard.
