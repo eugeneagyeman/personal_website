@@ -68,3 +68,49 @@ Design tokens live in the `@theme` block in `src/styles/global.css`. Dark mode i
 ## Deploying
 
 The build output in `dist/` is a folder of static files with no server-side component, so it can be served from anywhere. The site is intended to be hosted on Cloudflare Workers. There is no CI pipeline yet.
+
+### Cloudflare Workers
+
+The free plan is enough. A card is not required, and a Worker script is optional: with static assets only, Cloudflare serves matching files without invoking any Worker code, so the CPU and subrequest limits never come into play. Only the request count and asset limits apply.
+
+| Requirement        | Free plan limit | This site    |
+| :----------------- | :-------------- | :----------- |
+| Requests per day   | 100,000         | far below    |
+| Asset files        | 20,000          | 11           |
+| Largest asset file | 25 MiB          | 384 KB       |
+| Total build output | 512 MB cached   | 676 KB       |
+
+Requirements to deploy:
+
+- A Cloudflare account, free tier is sufficient
+- Node 22.12+ (already required by Astro)
+- `wrangler` as a dev dependency
+
+Add a `wrangler.jsonc` at the project root. Omit `main` because there is no Worker script:
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "personal-website",
+  "compatibility_date": "2026-09-29",
+  "assets": {
+    "directory": "./dist"
+  }
+}
+```
+
+Then build and deploy:
+
+```sh
+npm install --save-dev wrangler
+npm run build
+npx wrangler deploy
+```
+
+A custom domain is attached under **Workers & Pages** in the dashboard.
+
+Two gaps to be aware of:
+
+- There is no `404.html`, so unmatched routes return Cloudflare's default 404 rather than a styled page. Add `src/pages/404.astro` and set `assets.not_found_handling` to `"404-page"` to fix it.
+- `_headers` and `_redirects` are not used, so there are currently no cache-control or security headers. Those files go in `public/` and are picked up automatically.
+
