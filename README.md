@@ -1,43 +1,70 @@
-# Astro Starter Kit: Minimal
+# personal_website
+
+Source for my personal site, a small static site built with [Astro](https://astro.build).
+
+Astro ships zero JavaScript by default. The only client-side script on the entire site is the theme toggle.
+
+## Stack
+
+- **Astro 7**: static output, file-based routing, content collections
+- **Tailwind CSS 4**: wired in through `@tailwindcss/vite` rather than the old `@astrojs/tailwind` integration
+- **TypeScript** on `astro/tsconfigs/strict`
+- **@astrojs/mdx** and **@tailwindcss/typography**
+
+No framework components. No React, Vue or Svelte.
+
+## Getting started
+
+Requires **Node 22.12+** and **npm 9.6.5+**.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server runs at `http://localhost:4321` and hot-reloads on save.
 
-## 🚀 Project Structure
+| Command            | Action                                            |
+| :----------------- | :------------------------------------------------ |
+| `npm run dev`      | Start the local dev server                        |
+| `npm run build`    | Build the production site to `./dist/`            |
+| `npm run preview`  | Serve the production build locally                |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── assets/       Images imported through Astro's image pipeline
+├── components/   Header and theme toggle
+├── content/      Markdown content collections
+├── layouts/      Page shells (Layout, BlogPost)
+├── lib/          Small shared helpers
+├── pages/        Routes, one file per page
+└── styles/       Global CSS and design tokens
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Routes: `/`, `/about`, `/cv`, `/contact`, `/blog`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Adding a blog post
 
-Any static assets, like images, can be placed in the `public/` directory.
+Create a `.md` or `.mdx` file in `src/content/blog/`. The frontmatter is validated by the schema in `src/content.config.ts`:
 
-## 🧞 Commands
+```md
+---
+title: 'My Post'
+description: 'One line used for listings and meta tags.'
+pubDate: '2026-01-01'
+---
+```
 
-All commands are run from the root of the project, from a terminal:
+The URL comes from the filename, so `my-post.md` is served at `/blog/my-post/`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The blog index is currently a placeholder while the section is being written.
 
-## 👀 Want to learn more?
+## Theming
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Design tokens live in the `@theme` block in `src/styles/global.css`. Dark mode is class-based rather than following the OS preference, set by an inline script in `Layout.astro` to avoid a flash of the wrong theme.
+
+## Deploying
+
+The build output in `dist/` is a folder of static files with no server-side component, so it can be served from anywhere. The site is intended to be hosted on Cloudflare Workers. There is no CI pipeline yet.
