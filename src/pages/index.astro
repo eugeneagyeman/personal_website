@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import hero from '../assets/hero.jpg';
+---
+
+<Layout title="Eugene Agyeman | Software Engineer">
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+    <div class="grid sm:grid-cols-[1fr_300px] gap-10 sm:gap-14 items-center">
+      <div class="space-y-6">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white dark:text-white tracking-tight leading-[1.1]">
+          Hey I'm Eugene.<br />
+          I Love Tech. A&nbsp;lot.
+        </h1>
+
+        <p class="text-xl text-white/90 dark:text-slate-400 leading-relaxed">
+          Engineer based in London. Currently making real-time systems not fall over.
+        </p>
+
+        <div class="pt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <a href="/about" class="text-white dark:text-white border-b border-white dark:border-white hover:border-white/50 dark:hover:border-slate-400 hover:text-white/80 dark:hover:text-slate-300 transition-all font-medium pb-0.5">
+            More about me &rarr;
+          </a>
+          <a href="/cv" class="text-sm text-white/85 hover:text-white dark:text-slate-400 dark:hover:text-white transition-colors">
+            Or go straight to the CV
+          </a>
+        </div>
+      </div>
+
+      <Image
+        src={hero}
+        alt="Eugene at a viewpoint above a lake"
+        widths={[300, 450, 600]}
+        sizes="(min-width: 640px) 300px, (min-width: 400px) 60vw, 90vw"
+        loading="eager"
+        fetchpriority="high"
+        class="w-full max-w-[300px] mx-auto sm:max-w-none sm:mx-0 aspect-[3/4] object-cover rounded-2xl ring-1 ring-white/15"
+      />
+    </div>
+  </section>
+</Layout>

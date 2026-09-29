@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+}
+
+const { title, description, pubDate } = Astro.props;
+
+// Formatting the date nicely
+const formattedDate = pubDate.toLocaleDateString('en-us', {
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+});
+---
+
+<Layout title={title} description={description}>
+	<article class="max-w-3xl mx-auto px-4 py-16">
+		<header class="mb-10 text-center">
+			<div class="text-white/80 dark:text-cyan-500 text-sm font-semibold tracking-wider uppercase mb-2">
+				{formattedDate}
+			</div>
+			<h1 class="text-4xl md:text-5xl font-extrabold text-white dark:text-white mb-4 leading-tight">
+				{title}
+			</h1>
+			<p class="text-xl text-white/90 dark:text-slate-400 max-w-2xl mx-auto">
+				{description}
+			</p>
+		</header>
+    
+    <!-- Tailwind Typography: prose (light) -> dark:prose-invert (dark) -->
+		<div class="prose prose-lg dark:prose-invert mx-auto prose-a:text-white dark:prose-a:text-cyan-400 prose-headings:text-white dark:prose-headings:text-white prose-p:text-white/90 dark:prose-p:text-slate-300">
+			<slot />
+		</div>
+	</article>
+</Layout>

@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const email = 'eugene.agyeman1@yahoo.co.uk';
+
+const socials = [
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/eugene-agyeman' },
+];
+---
+
+<Layout title="Contact | Eugene Agyeman">
+  <section class="max-w-3xl mx-auto px-4 py-20">
+    <h1 class="text-3xl font-bold text-white dark:text-white mb-8">Get in Touch</h1>
+    
+    <p class="text-xl text-white/90 dark:text-slate-400 mb-8 leading-relaxed">
+      I'm always open to discussing new opportunities, interesting projects, or just chatting about technology.
+    </p>
+
+    <div class="space-y-4">
+      <div>
+        <h2 class="text-sm font-semibold text-white/85 uppercase tracking-wider mb-1">Email</h2>
+        <a href={`mailto:${email}`} class="text-2xl text-white dark:text-white hover:text-white/80 dark:hover:text-slate-300 transition-colors break-all">
+          {email}
+        </a>
+      </div>
+
+      <div class="pt-8">
+        <h2 class="text-sm font-semibold text-white/85 uppercase tracking-wider mb-3">Socials</h2>
+        <ul class="flex gap-6">
+          {socials.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white/80 hover:text-white dark:text-slate-400 dark:hover:text-white transition-colors"
+              >
+                {social.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
