@@ -106,7 +106,7 @@ const skillGroups = [
 		</div>
 
 		<article
-			class="rounded-2xl bg-white text-slate-900 shadow-xl ring-1 ring-slate-900/5 print:rounded-none print:shadow-none print:ring-0"
+			class="cv-paper rounded-2xl bg-white text-slate-900 shadow-xl ring-1 ring-slate-900/5 print:rounded-none print:shadow-none print:ring-0"
 		>
 			<header class="border-b border-slate-200 p-8 sm:p-10 print:p-0">
 				<div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
@@ -240,6 +240,11 @@ const skillGroups = [
 	</div>
 
 	<style is:global>
+		article.cv-paper ::selection {
+			background-color: var(--color-cyan-100);
+			color: var(--color-cyan-950);
+		}
+
 		@media print {
 			body {
 				margin: 0;
