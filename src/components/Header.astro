@@ -33,15 +33,68 @@ const links = [
         <ThemeToggle />
       </div>
 
-      <!-- Mobile Menu (Placeholder) -->
-      <div class="md:hidden ml-4">
-        <button class="text-white/80 dark:text-slate-400 hover:text-white dark:hover:text-white">
-          <span class="sr-only">Open menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      <!-- Mobile menu toggle -->
+      <button
+        id="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="md:hidden ml-4 text-white/80 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors"
+      >
+        <span class="sr-only">Toggle menu</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
     </div>
   </div>
+
+  <nav
+    id="mobile-menu"
+    aria-label="Mobile"
+    class="hidden md:hidden border-t border-white/20 dark:border-white/5 bg-electric dark:bg-slate-950"
+  >
+    <ul class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="block py-3 text-base font-medium text-white/80 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  const setOpen = (open) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    menu?.classList.toggle('hidden', !open);
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+  };
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  menu?.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLAnchorElement) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
+</script>
