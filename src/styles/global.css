@@ -17,6 +17,9 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
+    /* Reserve the scrollbar gutter on every page, so a centred container does
+       not shift sideways on pages too short to scroll. */
+    scrollbar-gutter: stable;
   }
 }
 
