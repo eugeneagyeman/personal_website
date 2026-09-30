@@ -19,7 +19,7 @@ const formattedDate = pubDate.toLocaleDateString('en-us', {
 ---
 
 <Layout title={title} description={description}>
-	<article class="max-w-3xl mx-auto px-4 py-16">
+	<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 		<header class="mb-10 text-center">
 			<div class="text-white/90 dark:text-cyan-500 text-sm font-medium tracking-wide mb-2">
 				{formattedDate}
@@ -33,7 +33,7 @@ const formattedDate = pubDate.toLocaleDateString('en-us', {
 		</header>
     
     <!-- Tailwind Typography: prose (light) -> dark:prose-invert (dark) -->
-		<div class="prose prose-lg dark:prose-invert mx-auto prose-a:text-white dark:prose-a:text-cyan-400 prose-headings:text-white dark:prose-headings:text-white prose-p:text-white/90 dark:prose-p:text-slate-300">
+		<div class="prose prose-lg dark:prose-invert max-w-3xl prose-a:text-white dark:prose-a:text-cyan-400 prose-headings:text-white dark:prose-headings:text-white prose-p:text-white/90 dark:prose-p:text-slate-300">
 			<slot />
 		</div>
 	</article>
