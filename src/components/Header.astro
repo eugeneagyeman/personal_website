@@ -17,8 +17,9 @@ const links = [
         Eugene Agyeman
       </a>
 
-      <!-- Navigation -->
-      <div class="flex items-center gap-6">
+      <!-- Navigation, theme toggle and mobile menu sit together so the two
+           controls stay adjacent instead of being spread by justify-between -->
+      <div class="flex items-center gap-5 md:gap-6">
         <nav class="hidden md:flex space-x-8">
           {links.map((link) => (
             <a
@@ -31,22 +32,22 @@ const links = [
         </nav>
 
         <ThemeToggle />
-      </div>
 
-      <!-- Mobile menu toggle -->
-      <button
-        id="menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        class="md:hidden ml-4 text-white/90 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors"
-      >
-        <span class="sr-only">Toggle menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-          <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
-        </svg>
-      </button>
+        <!-- Mobile menu toggle -->
+        <button
+          id="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="md:hidden -ml-2 text-white/90 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors"
+        >
+          <span class="sr-only">Toggle menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
