@@ -8,13 +8,14 @@
 @theme {
   --color-electric: #0000f2;
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Raleway", sans-serif;
+  /* SF Pro is not embedded: Apple platforms resolve -apple-system to the copy
+     the visitor already has installed. Everything else falls back to Inter. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
 }
 
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-sans);
     scroll-behavior: smooth;
   }
 }
