@@ -6,7 +6,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-electric: #bd00bd;
+  --color-electric: #0000f2;
 
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Raleway", sans-serif;

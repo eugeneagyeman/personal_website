@@ -15,7 +15,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-palette="#bd00bd,#0000f2">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -30,11 +30,20 @@ const {
 
     <!-- Theme Initialization Script (Prevents Flash) -->
     <script is:inline>
+      const palette = (document.documentElement.dataset.palette || '').split(',').filter(Boolean);
+      const stored = sessionStorage.getItem('theme-colour');
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
+        const colour = stored && palette.includes(stored)
+          ? stored
+          : palette[Math.floor(Math.random() * palette.length)];
+        if (colour) {
+          document.documentElement.style.setProperty('--color-electric', colour);
+          sessionStorage.setItem('theme-colour', colour);
+        }
       }
     </script>
 	</head>
