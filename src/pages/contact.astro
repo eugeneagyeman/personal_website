@@ -18,14 +18,14 @@ const socials = [
 
     <div class="space-y-4">
       <div>
-        <h2 class="text-sm font-semibold text-white/85 uppercase tracking-wider mb-1">Email</h2>
-        <a href={`mailto:${email}`} class="text-2xl text-white dark:text-white hover:text-white/80 dark:hover:text-slate-300 transition-colors break-all">
+        <h2 class="text-sm font-semibold text-white/95 uppercase tracking-wider mb-1">Email</h2>
+        <a href={`mailto:${email}`} class="text-2xl text-white dark:text-white hover:text-white/90 dark:hover:text-slate-300 transition-colors break-all">
           {email}
         </a>
       </div>
 
       <div class="pt-8">
-        <h2 class="text-sm font-semibold text-white/85 uppercase tracking-wider mb-3">Socials</h2>
+        <h2 class="text-sm font-semibold text-white/95 uppercase tracking-wider mb-3">Socials</h2>
         <ul class="flex gap-6">
           {socials.map((social) => (
             <li>
@@ -33,7 +33,7 @@ const socials = [
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-white/80 hover:text-white dark:text-slate-400 dark:hover:text-white transition-colors"
+                class="text-white/90 hover:text-white dark:text-slate-400 dark:hover:text-white transition-colors"
               >
                 {social.label}
               </a>
