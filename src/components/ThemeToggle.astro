@@ -1,8 +1,9 @@
 <button
   id="theme-toggle"
   type="button"
-  class="text-white/95 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5"
+  class="text-white/95 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors rounded-lg text-sm p-2.5"
   aria-label="Toggle Dark Mode"
+  aria-pressed="false"
 >
   <!-- Sun Icon (Hidden in Dark Mode) -->
   <svg
@@ -34,20 +35,17 @@
 <script>
   const themeToggleBtn = document.getElementById('theme-toggle');
 
+  const syncPressed = () =>
+    themeToggleBtn?.setAttribute(
+      'aria-pressed',
+      String(document.documentElement.classList.contains('dark')),
+    );
+
+  syncPressed();
+
   themeToggleBtn?.addEventListener('click', () => {
-    // toggle icons inside button
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
-    if (!isDark) {
-      const palette = (document.documentElement.dataset.palette || '')
-        .split(',')
-        .filter(Boolean);
-      const colour = palette[Math.floor(Math.random() * palette.length)];
-      if (colour) {
-        document.documentElement.style.setProperty('--color-electric', colour);
-        sessionStorage.setItem('theme-colour', colour);
-      }
-    }
+    syncPressed();
   });
 </script>

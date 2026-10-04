@@ -29,6 +29,21 @@ The dev server runs at `http://localhost:4321` and hot-reloads on save.
 | `npm run dev`      | Start the local dev server                        |
 | `npm run build`    | Build the production site to `./dist/`            |
 | `npm run preview`  | Serve the production build locally                |
+| `npm run shots`    | Screenshot the running dev server (see Visual QA)  |
+
+## Visual QA
+
+`npm run shots` captures desktop (1440px) and mobile (390px) screenshots of the
+key routes in both themes, writing them to `screenshots/` (gitignored). It needs
+the dev server running and Playwright's browsers installed once:
+
+```sh
+npm run dev
+npx playwright install chromium webkit
+npm run shots
+```
+
+Playwright is a devDependency, so CI never installs or downloads it.
 
 ## Structure
 
@@ -64,6 +79,8 @@ The blog index is currently a placeholder while the section is being written.
 ## Theming
 
 Design tokens live in the `@theme` block in `src/styles/global.css`. Dark mode is class-based rather than following the OS preference, set by an inline script in `Layout.astro` to avoid a flash of the wrong theme.
+
+Schibsted Grotesk is self-hosted from `public/fonts/` through `@font-face` in `global.css`, so there is no third-party font request; the CSP accordingly allows `font-src 'self'`.
 
 ## The CV PDF
 
@@ -154,7 +171,7 @@ npx wrangler deploy --dry-run
 gh secret set CLOUDFLARE_API_TOKEN
 ```
 
-The workflow uses `npm install` rather than `npm ci`. The lock file is generated on macOS and so does not contain the linux-x64 variants of the optional native dependencies Tailwind pulls in, which makes `npm ci` fail on a Linux runner with `Missing: @emnapi/core from lock file`. npm has no supported way to write a lock file covering every platform.
+The workflow uses `npm install --omit=dev` rather than `npm ci`. The lock file is generated on macOS and so does not contain the linux-x64 variants of the optional native dependencies Tailwind pulls in, which makes `npm ci` fail on a Linux runner with `Missing: @emnapi/core from lock file`. npm has no supported way to write a lock file covering every platform. Only production dependencies are installed for the build; `wrangler-action` supplies its own wrangler, and dev tools such as Playwright stay out of CI.
 
 ### Headers and redirects
 

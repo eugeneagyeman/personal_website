@@ -27,11 +27,15 @@ import hero from '../assets/hero.jpg';
         </div>
       </div>
 
+      {/* Density-based srcset: the fallback `src` is the 300px-wide 1x image
+          (~20KB) instead of the full 1536px original (~343KB) that `widths`
+          would emit, so non-srcset clients stop paying for pixels the CSS
+          never displays. */}
       <Image
         src={hero}
         alt="Eugene at a viewpoint above a lake"
-        widths={[300, 450, 600]}
-        sizes="(min-width: 640px) 300px, (min-width: 400px) 60vw, 90vw"
+        width={300}
+        densities={[1, 1.5, 2]}
         loading="eager"
         fetchpriority="high"
         class="w-full max-w-[300px] mx-auto sm:max-w-none sm:mx-0 aspect-[3/4] object-cover rounded-2xl ring-1 ring-white/15"

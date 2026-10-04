@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T07:46:00Z",
+  "title": "Design System: Eugene Agyeman — Personal Site",
+  "extensions": {
+    "colorMeta": {
+      "electric-klein": {
+        "role": "primary",
+        "displayName": "Electric Klein",
+        "canonical": "oklch(45% 0.30 264)",
+        "tonalRamp": [
+          "oklch(15% 0.12 264)",
+          "oklch(25% 0.20 264)",
+          "oklch(35% 0.26 264)",
+          "oklch(45% 0.30 264)",
+          "oklch(60% 0.26 264)",
+          "oklch(72% 0.20 264)",
+          "oklch(85% 0.12 264)",
+          "oklch(95% 0.05 264)"
+        ]
+      },
+      "electric-cyan": {
+        "role": "secondary",
+        "displayName": "Electric Cyan",
+        "canonical": "oklch(79% 0.13 212)",
+        "tonalRamp": [
+          "oklch(15% 0.03 212)",
+          "oklch(28% 0.06 212)",
+          "oklch(42% 0.09 212)",
+          "oklch(56% 0.11 212)",
+          "oklch(68% 0.12 212)",
+          "oklch(79% 0.13 212)",
+          "oklch(88% 0.08 212)",
+          "oklch(96% 0.04 212)"
+        ]
+      },
+      "document-cyan": {
+        "role": "tertiary",
+        "displayName": "Document Cyan",
+        "canonical": "oklch(50% 0.09 210)",
+        "tonalRamp": [
+          "oklch(15% 0.03 210)",
+          "oklch(28% 0.05 210)",
+          "oklch(39% 0.07 210)",
+          "oklch(50% 0.09 210)",
+          "oklch(62% 0.10 210)",
+          "oklch(74% 0.09 210)",
+          "oklch(86% 0.06 210)",
+          "oklch(95% 0.03 210)"
+        ]
+      },
+      "document-cyan-bright": {
+        "role": "tertiary",
+        "displayName": "Document Cyan Bright",
+        "canonical": "oklch(70% 0.13 217)",
+        "tonalRamp": [
+          "oklch(18% 0.04 217)",
+          "oklch(30% 0.07 217)",
+          "oklch(42% 0.10 217)",
+          "oklch(55% 0.12 217)",
+          "oklch(70% 0.13 217)",
+          "oklch(80% 0.10 217)",
+          "oklch(89% 0.06 217)",
+          "oklch(96% 0.03 217)"
+        ]
+      },
+      "ink-black": {
+        "role": "neutral",
+        "displayName": "Ink Black",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "oklch(12% 0 0)",
+          "oklch(22% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(88% 0 0)",
+          "oklch(98% 0 0)"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(20% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(78% 0 0)",
+          "oklch(88% 0 0)",
+          "oklch(95% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "steel-muted": {
+        "role": "neutral",
+        "displayName": "Steel Muted",
+        "canonical": "#94a3b8",
+        "tonalRamp": [
+          "oklch(18% 0.02 250)",
+          "oklch(30% 0.03 250)",
+          "oklch(42% 0.03 250)",
+          "oklch(54% 0.03 250)",
+          "oklch(63% 0.03 250)",
+          "oklch(71% 0.025 250)",
+          "oklch(83% 0.02 250)",
+          "oklch(95% 0.01 250)"
+        ]
+      },
+      "mist-hairline": {
+        "role": "neutral",
+        "displayName": "Mist Hairline",
+        "canonical": "#e2e8f0",
+        "tonalRamp": [
+          "oklch(20% 0.01 250)",
+          "oklch(35% 0.01 250)",
+          "oklch(50% 0.01 250)",
+          "oklch(65% 0.01 250)",
+          "oklch(78% 0.008 250)",
+          "oklch(88% 0.006 250)",
+          "oklch(93% 0.005 250)",
+          "oklch(97% 0.003 250)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page-defining headlines; at most one per viewport."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section and page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Role/company names, card values, post titles."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Standalone section headings that carry their own weight."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose; muted white on blue, slate-400 on black."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav links, contact card labels, blog post meta."
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper-lift",
+        "value": "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1), 0 0 0 1px rgba(15,23,42,0.05)",
+        "purpose": "The single elevated artefact: the white CV paper card, so it reads as a physical document on the coloured surface."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Tailwind default easing for the site's colour and border state transitions (~150-300ms)."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "White-on-blue primary action, e.g. \"View CV\" on the About page.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">View CV</a>",
+      "css": ".ds-btn-primary { display:inline-block; background:#ffffff; color:#0000f2; padding:10px 20px; border-radius:8px; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:1rem; font-weight:500; line-height:1.4; text-decoration:none; transition:background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background:rgba(255,255,255,0.85); } .ds-btn-primary:focus-visible { outline:2px solid rgba(255,255,255,0.6); outline-offset:2px; }"
+    },
+    {
+      "name": "Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "The one pill in the system: the CV \"Download PDF\" action with an inline download glyph.",
+      "html": "<a class=\"ds-btn-pill\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\"/></svg>Download PDF</a>",
+      "css": ".ds-btn-pill { display:inline-flex; align-items:center; gap:8px; background:transparent; color:#ffffff; border:1px solid rgba(255,255,255,0.5); padding:10px 20px; border-radius:9999px; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:0.875rem; font-weight:500; line-height:1.4; text-decoration:none; transition:background-color 150ms cubic-bezier(0.4,0,0.2,1), border-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-pill:hover { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.8); } .ds-btn-pill:focus-visible { outline:2px solid rgba(255,255,255,0.6); outline-offset:2px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "description": "Header navigation link; 14px weight 500, brightening to full white on hover.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">About Me</a>",
+      "css": ".ds-nav-link { color:rgba(255,255,255,0.9); font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:0.875rem; font-weight:500; line-height:1.4; text-decoration:none; transition:color 200ms cubic-bezier(0.4,0,0.2,1); } .ds-nav-link:hover { color:#ffffff; } .ds-nav-link:focus-visible { outline:2px solid rgba(255,255,255,0.4); outline-offset:3px; border-radius:4px; }"
+    },
+    {
+      "name": "Wordmark",
+      "kind": "custom",
+      "description": "The full-name masthead in the header; 24px weight 700.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\">Eugene Agyeman</a>",
+      "css": ".ds-wordmark { color:#ffffff; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:1.5rem; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-wordmark:hover { color:rgba(255,255,255,0.95); } .ds-wordmark:focus-visible { outline:2px solid rgba(255,255,255,0.5); outline-offset:3px; border-radius:4px; }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "description": "Icon-only square button that flips light/dark; sun shown in dark mode, moon in light.",
+      "html": "<button class=\"ds-icon-btn\" type=\"button\" aria-label=\"Toggle Dark Mode\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z\"/></svg></button>",
+      "css": ".ds-icon-btn { display:inline-flex; align-items:center; justify-content:center; background:transparent; border:none; color:rgba(255,255,255,0.95); padding:10px; border-radius:8px; cursor:pointer; transition:color 150ms cubic-bezier(0.4,0,0.2,1), background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-icon-btn:hover { color:#ffffff; background:rgba(255,255,255,0.08); } .ds-icon-btn:focus-visible { outline:2px solid rgba(255,255,255,0.3); outline-offset:2px; }"
+    },
+    {
+      "name": "Contact Card",
+      "kind": "card",
+      "refersTo": "card-contact",
+      "description": "Translucent pane linking to a contact channel: 44px icon badge, semibold value, trailing arrow.",
+      "html": "<a class=\"ds-contact-card\" href=\"#\"><span class=\"ds-contact-icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 6.5A2.5 2.5 0 014.5 4h15A2.5 2.5 0 0122 6.5v11a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 17.5v-11zM4 6l8 6 8-6\"/></svg></span><span class=\"ds-contact-body\"><span class=\"ds-contact-label\">Email</span><span class=\"ds-contact-value\">hi@eugeneagyeman.io</span><span class=\"ds-contact-note\">Best way to reach me</span></span><svg class=\"ds-contact-arrow\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M9 7h8v8\"/></svg></a>",
+      "css": ".ds-contact-card { display:flex; align-items:flex-start; gap:16px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.6); border-radius:16px; padding:24px; text-decoration:none; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; transition:background-color 150ms cubic-bezier(0.4,0,0.2,1), border-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-contact-card:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.85); } .ds-contact-card:focus-visible { outline:2px solid rgba(255,255,255,0.6); outline-offset:2px; } .ds-contact-icon { display:flex; width:44px; height:44px; flex:0 0 44px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.15); color:#ffffff; box-shadow:0 0 0 1px rgba(255,255,255,0.2); } .ds-contact-body { min-width:0; flex:1 1 auto; } .ds-contact-label { display:block; font-size:0.75rem; font-weight:600; letter-spacing:0.025em; color:rgba(255,255,255,0.8); } .ds-contact-value { display:block; margin-top:6px; font-size:1.125rem; font-weight:600; line-height:1.35; color:#ffffff; } .ds-contact-note { display:block; margin-top:4px; font-size:0.875rem; color:rgba(255,255,255,0.85); } .ds-contact-arrow { margin-left:auto; margin-top:4px; width:16px; height:16px; flex:0 0 16px; color:rgba(255,255,255,0.5); transition:color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-contact-card:hover .ds-contact-arrow { color:#ffffff; }"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "description": "Small cyan label for meta lines such as a post date; cyan is the dark-theme value.",
+      "html": "<p class=\"ds-section-label\">Jun 2020 – Jun 2021</p>",
+      "css": ".ds-section-label { color:rgba(255,255,255,0.95); font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:0.875rem; font-weight:600; letter-spacing:0.025em; line-height:1.4; } .ds-section-label--dark { color:#22d3ee; }"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "description": "A standalone section heading that carries its own weight; cyan is the dark-theme value.",
+      "html": "<h2 class=\"ds-section-heading\">A typical day</h2>",
+      "css": ".ds-section-heading { margin:0; color:#ffffff; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:1.5rem; font-weight:700; line-height:1.2; letter-spacing:-0.025em; } .ds-section-heading--dark { color:#22d3ee; }"
+    },
+    {
+      "name": "CV Paper Card",
+      "kind": "card",
+      "refersTo": "card-paper",
+      "description": "The one elevated artefact: white document surface with a real shadow and a faint ring.",
+      "html": "<div class=\"ds-paper-card\"><h3 class=\"ds-paper-title\">Full Stack Software Engineer</h3><p class=\"ds-paper-meta\">Axon · London</p></div>",
+      "css": ".ds-paper-card { background:#ffffff; color:#0f172a; border-radius:16px; padding:32px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1), 0 0 0 1px rgba(15,23,42,0.05); font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; } .ds-paper-title { margin:0; font-size:1.125rem; font-weight:700; line-height:1.4; } .ds-paper-meta { margin:4px 0 0; font-size:0.875rem; font-weight:600; }"
+    },
+    {
+      "name": "Skill Chip",
+      "kind": "chip",
+      "refersTo": "chip-skill",
+      "description": "Static skill tag on the CV paper; the only place a light slate fill appears.",
+      "html": "<span class=\"ds-chip\">Go</span>",
+      "css": ".ds-chip { display:inline-block; background:#f1f5f9; color:#334155; font-family:\"Schibsted Grotesk\",ui-sans-serif,system-ui,sans-serif; font-size:0.75rem; font-weight:500; line-height:1.4; padding:2px 8px; border-radius:4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Broadcast",
+    "overview": "The site runs on a single, unmissable signal: Electric Klein, a saturated ultramarine that floods the entire \"light\" theme — page, header, and footer alike. This is not a background colour used sparingly; it is the broadcast itself. Against it, everything else is a hard, confident counterpoint: solid white type, hairline borders, flat surfaces, and a total absence of decoration. The effect is a screen that announces itself rather than one that recedes, which matches the site's purpose as a personal home base that has to work for recruiters, peers, and casual visitors alike.\n\nAt night the signal inverts. The black theme drops to true black and swaps the blue for a bright accent that marks attention: section labels, links, and the small status dots beside CV roles. The accent is the one place colour is allowed to speak in dark mode; everything else is a cool slate hierarchy over black. This two-world structure — a flooded blue day, a quiet black night — is the system's defining move.\n\nThe build is deliberately unfussy. Components state what they are and step aside: buttons are flat rectangles or simple pills, cards are translucent panes on the coloured surface, and depth is drawn with borders and rings rather than shadows. The one exception is the CV, which lifts off the surface as a white \"paper\" artefact with a real shadow, because it is a document, not a panel. Warmth comes through the copy and the human touches, never through ornament.",
+    "keyCharacteristics": [
+      "One dominant surface colour (Electric Klein) carried at full saturation, not as an accent.",
+      "Two named worlds: a flooded blue light theme and a true-black dark theme.",
+      "Flat by default; depth from hairlines, rings, and translucency.",
+      "A single warm accent reserved for attention in dark mode.",
+      "Hard, confident typography — heavy weights, tight tracking, generous line height on body."
+    ],
+    "rules": [
+      { "name": "The Flooded Surface Rule", "body": "Electric Klein is a surface, not a highlight. Any screen in the light theme is expected to sit on the blue, not beside it. Do not reduce it to a chip or an underline.", "section": "colors" },
+      { "name": "The Accent-Not-The-Background Rule", "body": "The defining background colour is never reused as an accent on top of itself. Accents that sit on the white CV document use Document Cyan, not Electric Klein, so they separate from the page rather than disappearing into it.", "section": "colors" },
+      { "name": "The One Signal Family Rule", "body": "A single accent family — cyan — carries all emphasis. Dark surfaces take the bright Electric Cyan; the white CV document takes its deeper Document Cyan. There is no second accent hue. If everything is accented, nothing is.", "section": "colors" },
+      { "name": "The Weight-Not-Faces Rule", "body": "Hierarchy is built from weight and size within one family. Never introduce a second display typeface to create contrast; use weight, scale, and tracking instead.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Depth is expressed with borders, rings, and translucency; shadow appears only on the CV paper artefact, where it signals \"document\", not \"elevation\".", "section": "elevation" }
+    ],
+    "dos": [
+      "Do carry Electric Klein at full saturation as a surface. It is the broadcast, not a highlight.",
+      "Do build hierarchy from weight and scale inside the single system font stack; keep display headlines at weight 800 with tight tracking.",
+      "Do express depth with hairlines, 1px rings, and translucent white fills; reserve the one shadow for the CV paper.",
+      "Do reserve the cyan accent for attention in dark mode only.",
+      "Do keep the white CV document's accents in Document Cyan, distinct from the Electric Klein background.",
+      "Do give a standalone section heading real size (text-2xl); there is no eyebrow above a headline.",
+      "Do keep the JS surface to the theme toggle and the mobile menu, and regenerate the CSP hashes whenever either inline script changes.",
+      "Do set body copy at the muted white/slate step and hold a reading measure near 42rem.",
+      "Do keep the CV's two-column-at-lg, three-column-in-print structure and tabular numerals."
+    ],
+    "donts": [
+      "Don't tint, gradient, or pastelise Electric Klein — no soft blues, no gradient fills.",
+      "Don't introduce a second display typeface for contrast.",
+      "Don't add ambient shadows or layered elevation beyond the CV artefact.",
+      "Don't scatter the cyan accent across a screen; if everything is accent, the signal is lost.",
+      "Don't add decorative borders, angled geometry, or textured backgrounds — the colour and grid do the work.",
+      "Don't put marketing/hero copy in a corporate register; the voice is first-person and warm (see PRODUCT.md)."
+    ]
+  }
+}

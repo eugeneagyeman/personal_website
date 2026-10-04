@@ -10,54 +10,82 @@ interface Props {
 const {
 	title,
 	description =
-		"Software engineer in London, working on real-time backend systems and writing about what he builds.",
+		"Software engineer in London, working on real-time backend systems and writing about what I build.",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/og-image.jpg', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth" data-palette="#bd00bd,#0000f2">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+		<link rel="canonical" href={canonicalURL} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Eugene Agyeman" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
 
     <!-- Theme Initialization Script (Prevents Flash) -->
     <script is:inline>
-      const palette = (document.documentElement.dataset.palette || '').split(',').filter(Boolean);
-      const stored = sessionStorage.getItem('theme-colour');
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
-        const colour = stored && palette.includes(stored)
-          ? stored
-          : palette[Math.floor(Math.random() * palette.length)];
-        if (colour) {
-          document.documentElement.style.setProperty('--color-electric', colour);
-          sessionStorage.setItem('theme-colour', colour);
-        }
       }
     </script>
+
+    <noscript>
+      <style>
+        /* Without JavaScript the theme toggle cannot work, so hide it. The
+           mobile menu is a JS disclosure, so reveal the links rather than
+           leaving mobile visitors without navigation. */
+        #theme-toggle {
+          display: none;
+        }
+        @media (max-width: 767px) {
+          #menu-toggle {
+            display: none;
+          }
+          #mobile-menu {
+            display: block;
+          }
+        }
+      </style>
+    </noscript>
 	</head>
-	<body class="bg-electric dark:bg-black print:bg-white text-white dark:text-slate-200 min-h-screen flex flex-col font-sans antialiased selection:bg-white/30 selection:text-white">
+	<body class="bg-electric dark:bg-black print:bg-white text-white dark:text-slate-200 min-h-screen flex flex-col font-sans antialiased selection:bg-white/30 selection:text-white print:min-h-0 print:block">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[color:var(--color-electric)]"
+    >
+      Skip to content
+    </a>
+
     <Header />
 
-		<main class="flex-grow pt-20">
+		<main id="main" class="flex-grow pt-20 print:pt-0">
 			<slot />
 		</main>
 
     <footer class="site-footer border-t border-white/20 dark:border-white/5 bg-electric dark:bg-black py-12 transition-colors duration-300">
-      <div class="max-w-4xl mx-auto px-4 text-center text-white/95 dark:text-slate-500 text-sm font-bold">
+      <div class="max-w-4xl mx-auto px-4 text-center text-white/95 dark:text-slate-400 text-sm font-bold">
         <p>&copy; {new Date().getFullYear()} Eugene Agyeman</p>
-        <p class="mt-1 font-normal text-white/90 dark:text-slate-500">Built with ❤️ from London, 🇬🇧</p>
+        <p class="mt-1 font-normal text-white/90 dark:text-slate-400">Built with ❤️ from London, 🇬🇧</p>
       </div>
     </footer>
 	</body>

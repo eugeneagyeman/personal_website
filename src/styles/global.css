@@ -5,12 +5,36 @@
 /* Force class-based dark mode */
 @variant dark (&:where(.dark, .dark *));
 
+/* Schibsted Grotesk (variable, 400-900), self-hosted so every platform gets the
+   same voice. Subsets mirror Google Fonts' latin / latin-ext split. */
+@font-face {
+  font-family: "Schibsted Grotesk";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/schibsted-grotesk-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Schibsted Grotesk";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/schibsted-grotesk-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme {
   --color-electric: #0000f2;
 
-  /* SF Pro is not embedded: Apple platforms resolve -apple-system to the copy
-     the visitor already has installed. Everything else falls back to Inter. */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+  /* Schibsted Grotesk is self-hosted (see @font-face above); the system stack is
+     only a fallback while it loads. */
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
 }
 
 @layer base {
@@ -21,9 +45,43 @@
        not shift sideways on pages too short to scroll. */
     scrollbar-gutter: stable;
   }
+
+  /* Both site surfaces (blue and black) carry light text, so native controls
+     and scrollbars should render dark; the white CV document is the exception. */
+  :root {
+    color-scheme: dark;
+  }
+
+  .cv-paper {
+    color-scheme: light;
+  }
+
+  @media print {
+    :root {
+      color-scheme: light;
+    }
+  }
+
+  /* Visible keyboard focus on both the blue and black surfaces. White holds on
+     either; the white CV document overrides to its cyan below. */
+  :focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 2px;
+  }
+
+  .cv-paper :focus-visible {
+    outline-color: #0e7490;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
-/* Custom Scrollbar */
+/* Custom scrollbar, derived from the surface foreground so it belongs to the
+   blue day and the black night rather than a generic gray. */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -33,25 +91,19 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  /* slate-300 */
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-  /* slate-400 */
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Dark mode scrollbar overrides */
-.dark ::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: rgba(255, 255, 255, 0.35);
 }

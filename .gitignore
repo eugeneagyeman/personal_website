@@ -15,6 +15,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# local visual-QA screenshots
+screenshots/
+
 
 # environment variables
 .env

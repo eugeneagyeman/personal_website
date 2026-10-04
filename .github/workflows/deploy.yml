@@ -16,6 +16,12 @@ jobs:
     name: Build and deploy to Cloudflare
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # The Cloudflare secrets live on the `production` environment, not at repo
+    # level. Environment secrets are only injected into jobs that pass the
+    # environment's protection rules, so with a required reviewer configured
+    # every deploy waits for manual approval — a push (or a malicious workflow
+    # edit) alone can no longer reach the token.
+    environment: production
 
     steps:
       - name: Check out
@@ -32,10 +38,15 @@ jobs:
       # dependencies that Tailwind pulls in, and `npm ci` fails on them with
       # "Missing: @emnapi/core from lock file". npm has no supported way to
       # generate a lock file covering every platform.
+      #
+      # `--omit=dev`: the build needs only production dependencies (astro,
+      # tailwind, mdx), and wrangler-action supplies its own wrangler. This also
+      # keeps dev tools such as Playwright — which downloads browser binaries on
+      # install — out of CI.
       - name: Install dependencies
         run: |
           npm install --global npm@11
-          npm install
+          npm install --omit=dev
 
       - name: Build
         run: npm run build
