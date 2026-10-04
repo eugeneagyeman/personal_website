@@ -67,7 +67,7 @@ level. Approve the run from the Actions page or with:
 
 ```sh
 gh api -X POST repos/eugeneagyeman/personal_website/actions/runs/<id>/pending_deployments \
-  -f "environment_ids[]=$(gh api repos/eugeneagyeman/personal_website/environments/production --jq .id)" \
+  -F "environment_ids[]=$(gh api repos/eugeneagyeman/personal_website/environments/production --jq .id)" \
   -f state=approved
 ```
 

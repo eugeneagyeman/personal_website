@@ -3,6 +3,18 @@ name: Deploy
 on:
   push:
     branches: [main]
+    # Only changes that can alter the built site trigger a deploy. Prose-only
+    # files (README, DESIGN, PRODUCT) are documentation about the repo, not
+    # inputs to it, and should not wait on a production approval.
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'wrangler.jsonc'
+      - '.github/workflows/deploy.yml'
 
 concurrency:
   group: deploy-production
