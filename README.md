@@ -1,188 +1,79 @@
 # Personal Website
 
-Source for my personal site, a small static site built with [Astro](https://astro.build).
+Source for [eugeneagyeman.io](https://eugeneagyeman.io) — a static Astro site
+served as Cloudflare Workers assets. No framework components, no hydration; the
+only client-side scripts are the theme toggle and the mobile menu.
 
-Astro ships zero JavaScript by default. The only client-side script on the entire site is the theme toggle.
+## Commands
 
-## Stack
-
-- **Astro 7**: static output, file-based routing, content collections
-- **Tailwind CSS 4**: wired in through `@tailwindcss/vite` rather than the old `@astrojs/tailwind` integration
-- **TypeScript** on `astro/tsconfigs/strict`
-- **@astrojs/mdx** and **@tailwindcss/typography**
-
-No framework components. No React, Vue or Svelte.
-
-## Getting started
-
-Requires **Node 22.12+** and **npm 9.6.5+**.
+Requires Node 22.12+.
 
 ```sh
 npm install
-npm run dev
+npm run dev       # http://localhost:4321
+npm run build     # static build to ./dist/ (also derives the CSP hashes)
+npm run preview   # serve the build locally
+npm run shots     # screenshot every route, both themes, desktop + mobile
 ```
 
-The dev server runs at `http://localhost:4321` and hot-reloads on save.
+`npm run shots` needs `npm run dev` running and `npx playwright install chromium`
+once. Playwright is a devDependency, so CI never installs it.
 
-| Command            | Action                                            |
-| :----------------- | :------------------------------------------------ |
-| `npm run dev`      | Start the local dev server                        |
-| `npm run build`    | Build the production site to `./dist/`            |
-| `npm run preview`  | Serve the production build locally                |
-| `npm run shots`    | Screenshot the running dev server (see Visual QA)  |
-
-## Visual QA
-
-`npm run shots` captures desktop (1440px) and mobile (390px) screenshots of the
-key routes in both themes, writing them to `screenshots/` (gitignored). It needs
-the dev server running and Playwright's browsers installed once:
-
-```sh
-npm run dev
-npx playwright install chromium webkit
-npm run shots
-```
-
-Playwright is a devDependency, so CI never installs or downloads it.
-
-## Structure
+## Layout
 
 ```text
 src/
-├── assets/       Images imported through Astro's image pipeline
-├── components/   Header and theme toggle
-├── content/      Markdown content collections
-├── layouts/      Page shells (Layout, BlogPost)
-├── lib/          Small shared helpers
-├── pages/        Routes, one file per page
-└── styles/       Global CSS and design tokens
+├── assets/        Images (the hero photo, processed by Astro)
+├── components/    Header, theme toggle
+├── content/       Blog collection (markdown)
+├── data/          cv.json — the CV's structured data
+├── layouts/       Layout, BlogPost
+├── lib/           site.ts (identity facts), theme.mjs (theme contract)
+├── pages/         One file per route
+└── styles/        Tokens and global CSS
 ```
 
 Routes: `/`, `/about`, `/cv`, `/contact`, `/blog`.
 
-### Adding a blog post
+## Things that bite
 
-Create a `.md` or `.mdx` file in `src/content/blog/`. The frontmatter is validated by the schema in `src/content.config.ts`:
+**Identity facts live in `src/lib/site.ts`.** Name and social links are declared
+once; change them there, not in a page. Two addresses exist on purpose: `hi@` for
+the contact page and `eugene@` for the CV and its PDF.
 
-```md
----
-title: 'My Post'
-description: 'One line used for listings and meta tags.'
-pubDate: '2026-01-01'
----
-```
+**CSP hashes are derived, not hand-written.** `scripts/sync-csp.mjs` runs inside
+`npm run build` and rewrites the `script-src` directive in `public/_headers` from
+the built inline scripts. Edit scripts freely; just commit the regenerated
+`_headers`. A stale hash shows up as `Refused to execute inline script`.
 
-The URL comes from the filename, so `my-post.md` is served at `/blog/my-post/`.
+**The CV exists twice.** HTML is rendered from `src/data/cv.json` behind the
+schema in `src/content.config.ts`; the PDF is exported from LaTeX in Overleaf and
+committed as an artefact. They can drift — update both.
 
-The blog index is currently a placeholder while the section is being written.
+**Adding a blog post**: drop a `.md` or `.mdx` file in `src/content/blog/` with
+`title`, `description`, and `pubDate` frontmatter. The slug is the filename.
 
-## Theming
+## Deploying
 
-Design tokens live in the `@theme` block in `src/styles/global.css`. Dark mode is class-based rather than following the OS preference, set by an inline script in `Layout.astro` to avoid a flash of the wrong theme.
+Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds and
+deploys. The job targets the **`production` environment**, so each run waits for
+your approval before the Cloudflare secrets are injected:
 
-Schibsted Grotesk is self-hosted from `public/fonts/` through `@font-face` in `global.css`, so there is no third-party font request; the CSP accordingly allows `font-src 'self'`.
+- `CLOUDFLARE_API_TOKEN` — Workers Scripts: Edit on this account
+- `CLOUDFLARE_ACCOUNT_ID`
 
-## The CV PDF
-
-`public/eugene-agyeman-cv.pdf` is the downloadable version of the CV. Its LaTeX source is kept in Overleaf rather than in this repository, so the PDF is committed here as the exported artefact. To update it, re-export from Overleaf and replace the file in `public/`.
-
-Astro copies `public/` into the build, so the PDF is served from `/eugene-agyeman-cv.pdf` with no extra configuration. The `Download PDF` button on `/cv` is a plain link to it, so it works with JavaScript disabled.
-
-The HTML version at `/cv` and the PDF are written to describe the same experience. They are maintained separately, so they can drift apart if one is updated without the other.
-
-### Cloudflare Workers
-
-The free plan is enough. A card is not required, and a Worker script is optional: with static assets only, Cloudflare serves matching files without invoking any Worker code, so the CPU and subrequest limits never come into play. Only the request count and asset limits apply.
-
-| Requirement        | Free plan limit | This site    |
-| :----------------- | :-------------- | :----------- |
-| Requests per day   | 100,000         | far below    |
-| Asset files        | 20,000          | 11           |
-| Largest asset file | 25 MiB          | 384 KB       |
-| Total build output | 512 MB cached   | 676 KB       |
-
-Requirements to deploy:
-
-- A Cloudflare account, free tier is sufficient
-- Node 22.12+ (already required by Astro)
-- `wrangler`, already in `devDependencies`
-
-`wrangler.jsonc` is checked in. There is deliberately no `main` key and no worker script: the site is assets-only, and Cloudflare serves matching files straight from the CDN without invoking any Worker code. Omitting `main` is supported for assets-only Workers, so the CPU and subrequest limits never come into play. `workers_dev` is `false` because the site is served from a custom domain rather than a `workers.dev` URL.
-
-```jsonc
-{
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "personal-website",
-  "compatibility_date": "2026-09-29",
-  "workers_dev": false,
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page"
-  },
-  "observability": {
-    "logs": {
-      "enabled": true,
-      "head_sampling_rate": 1,
-      "invocation_logs": true,
-      "persist": true
-    },
-    "traces": {
-      "enabled": false,
-      "head_sampling_rate": 1,
-      "persist": true
-    }
-  }
-}
-```
-
-Invocation logs are persisted on the Workers Free plan, which is enough for a site this size. If the volume ever becomes worth reducing, lower `head_sampling_rate`.
-
-Wrangler also accepts `wrangler.toml`. Cloudflare recommends the JSON form for new projects because some newer features are JSON-only, and the `observability` block above is the reason to prefer it here.
-
-### Deploying
-
-Pushing to `main` deploys automatically through GitHub Actions. To deploy by hand:
+Both live on the environment (Settings → Environments → production), not at repo
+level. Approve the run from the Actions page or with:
 
 ```sh
-npx wrangler login
-npm run deploy
+gh api -X POST repos/eugeneagyeman/personal_website/actions/runs/<id>/pending_deployments \
+  -f "environment_ids[]=$(gh api repos/eugeneagyeman/personal_website/environments/production --jq .id)" \
+  -f state=approved
 ```
 
-Authentication is per machine. `npx wrangler login` opens a browser and stores credentials, or set `CLOUDFLARE_API_TOKEN` in the environment.
+To deploy by hand instead: `npx wrangler login && npm run deploy`.
 
-To check the configuration without uploading anything, and without being logged in:
-
-```sh
-npx wrangler deploy --dry-run
-```
-
-### CI
-
-`.github/workflows/deploy.yml` builds and deploys on every push to `main`. It needs two repository secrets:
-
-| Secret                  | Value                                              |
-| :---------------------- | :------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  | A Cloudflare API token with Workers Scripts:Edit   |
-| `CLOUDFLARE_ACCOUNT_ID` | The Cloudflare account ID                          |
-
-`CLOUDFLARE_ACCOUNT_ID` is already set. The API token has to be created in the Cloudflare dashboard under **My Profile**, API Tokens, using the **Edit Cloudflare Workers** template, then added with:
-
-```sh
-gh secret set CLOUDFLARE_API_TOKEN
-```
-
-The workflow uses `npm install --omit=dev` rather than `npm ci`. The lock file is generated on macOS and so does not contain the linux-x64 variants of the optional native dependencies Tailwind pulls in, which makes `npm ci` fail on a Linux runner with `Missing: @emnapi/core from lock file`. npm has no supported way to write a lock file covering every platform. Only production dependencies are installed for the build; `wrangler-action` supplies its own wrangler, and dev tools such as Playwright stay out of CI.
-
-### Headers and redirects
-
-`public/_headers` is deployed automatically and sets security headers on every response, plus a one-year immutable `Cache-Control` on `/_astro/` where Astro's fingerprinted assets live.
-
-Two things to know before editing it:
-
-- A request matching several rules inherits headers from all of them, and **a header declared twice has its values joined with a comma**. Each header belongs in exactly one rule.
-- The `Content-Security-Policy` allows the inline scripts by SHA-256 hash rather than using `unsafe-inline`. Those hashes are tied to the exact minified script text, so they are derived from the build output: `scripts/sync-csp.mjs` runs as part of `npm run build` and rewrites the `script-src` directive in both `public/_headers` and `dist/_headers`. Edit scripts freely; commit the regenerated `_headers` alongside. A failing hash in the browser console looks like `Refused to execute inline script`.
-
-There is no `_redirects` file because nothing needs redirecting. Cloudflare handles the HTTP to HTTPS upgrade itself, and the site has no moved or renamed URLs.
-
-To serve the styled 404 page, `assets.not_found_handling` is set to `"404-page"`, which serves `dist/404.html`.
-
+`wrangler.jsonc` is assets-only — no `main`, no worker script, so nothing
+invokes Worker code at request time. `public/_headers` sets the security headers
+and the immutable cache for `/_astro/`; note that a header declared in two
+matching rules gets its values comma-joined, so each belongs in exactly one.
