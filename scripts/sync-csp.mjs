@@ -48,10 +48,14 @@ const scriptSrc = `script-src 'self' ${[...hashes].sort().join(' ')}`;
 
 for (const target of [join(distDir, '_headers'), join(root, 'public', '_headers')]) {
 	const text = readFileSync(target, 'utf8');
-	const updated = text.replace(/script-src [^\n]*/, scriptSrc);
-	if (updated === text) {
+	if (!/script-src [^\n]*/.test(text)) {
 		console.error(`sync-csp: no script-src directive found in ${target}`);
 		process.exit(1);
+	}
+	const updated = text.replace(/script-src [^\n]*/, scriptSrc);
+	if (updated === text) {
+		console.log(`sync-csp: ${target} already in sync`);
+		continue;
 	}
 	writeFileSync(target, updated);
 	console.log(`sync-csp: wrote ${hashes.size} script hash(es) to ${target}`);
