@@ -1,25 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const email = 'hi@eugeneagyeman.io';
+import { site } from '../lib/site';
 
 const channels = [
 	{
 		label: 'Email',
-		value: email,
-		href: `mailto:${email}`,
+		value: site.email,
+		href: `mailto:${site.email}`,
 		note: 'Best way to reach me',
 	},
 	{
 		label: 'LinkedIn',
 		value: 'linkedin.com/in/eugene-agyeman',
-		href: 'https://www.linkedin.com/in/eugene-agyeman',
+		href: site.links.linkedin,
 		note: 'Work and experience',
 	},
 	{
 		label: 'GitHub',
 		value: 'github.com/eugeneagyeman',
-		href: 'https://github.com/eugeneagyeman',
+		href: site.links.github,
 		note: 'Side projects and experiments',
 	},
 	{

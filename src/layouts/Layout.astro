@@ -1,17 +1,14 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import { site } from '../lib/site';
 
 interface Props {
 	title: string;
 	description?: string;
 }
 
-const {
-	title,
-	description =
-		"Software engineer in London, working on real-time backend systems and writing about what I build.",
-} = Astro.props;
+const { title, description = site.description } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.jpg', Astro.site);
@@ -29,7 +26,7 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
 
 		<link rel="canonical" href={canonicalURL} />
 		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content="Eugene Agyeman" />
+		<meta property="og:site_name" content={site.name} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalURL} />
@@ -39,7 +36,9 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageURL} />
 
-    <!-- Theme Initialization Script (Prevents Flash) -->
+    <!-- Theme Initialization Script (Prevents Flash). This script must stay
+         inline and dependency-free, so it re-declares the storage key from
+         src/lib/theme.mjs literally — keep the two in sync. -->
     <script is:inline>
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -53,7 +52,9 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
       <style>
         /* Without JavaScript the theme toggle cannot work, so hide it. The
            mobile menu is a JS disclosure, so reveal the links rather than
-           leaving mobile visitors without navigation. */
+           leaving mobile visitors without navigation. These ids are owned by
+           THEME_IDS in src/lib/theme.mjs — CSS selectors can't import, so
+           keep them in sync. */
         #theme-toggle {
           display: none;
         }
@@ -84,7 +85,7 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
 
     <footer class="site-footer border-t border-white/20 dark:border-white/5 bg-electric dark:bg-black py-12 transition-colors duration-300">
       <div class="max-w-4xl mx-auto px-4 text-center text-white/95 dark:text-slate-400 text-sm font-bold">
-        <p>&copy; {new Date().getFullYear()} Eugene Agyeman</p>
+        <p>&copy; {new Date().getFullYear()} {site.name}</p>
         <p class="mt-1 font-normal text-white/90 dark:text-slate-400">Built with ❤️ from London, 🇬🇧</p>
       </div>
     </footer>

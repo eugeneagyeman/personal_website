@@ -180,7 +180,7 @@ The workflow uses `npm install --omit=dev` rather than `npm ci`. The lock file i
 Two things to know before editing it:
 
 - A request matching several rules inherits headers from all of them, and **a header declared twice has its values joined with a comma**. Each header belongs in exactly one rule.
-- The `Content-Security-Policy` allows the two inline scripts by SHA-256 hash rather than using `unsafe-inline`. Those hashes are tied to the exact script text, so if you change the theme script in `Layout.astro` or the toggle in `ThemeToggle.astro`, regenerate them or the site will fail to boot with a CSP violation. A failing check in the browser console looks like `Refused to execute inline script`.
+- The `Content-Security-Policy` allows the inline scripts by SHA-256 hash rather than using `unsafe-inline`. Those hashes are tied to the exact minified script text, so they are derived from the build output: `scripts/sync-csp.mjs` runs as part of `npm run build` and rewrites the `script-src` directive in both `public/_headers` and `dist/_headers`. Edit scripts freely; commit the regenerated `_headers` alongside. A failing hash in the browser console looks like `Refused to execute inline script`.
 
 There is no `_redirects` file because nothing needs redirecting. Cloudflare handles the HTTP to HTTPS upgrade itself, and the site has no moved or renamed URLs.
 

@@ -1,91 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+import { site } from '../lib/site';
 
-const email = 'eugene.agyeman1@yahoo.co.uk';
-const linkedin = 'https://www.linkedin.com/in/eugene-agyeman';
-
-const experience = [
-	{
-		role: 'Full Stack Software Engineer, Real-Time Operations',
-		company: 'Axon',
-		location: 'London, United Kingdom',
-		start: { label: 'Apr 2023', iso: '2023-04' },
-		end: null,
-		highlights: [
-			'Own the rules domain end-to-end within Axon’s Real-Time Alerts platform, spanning data modelling, APIs, real-time evaluation, operator tooling, and cloud operations for a platform available to approximately 20,000 agencies and more than 1 million users globally.',
-			'Built a low-latency rule engine in Go that evaluates real-time events against agency-defined alert rules across a platform processing more than 400 million events annually, applying role, proximity, and permission conditions while delivering alerts with p99 latency under 1.5 seconds.',
-			'Designed the rules data model and REST APIs and built the operator-facing Rule Editor in Angular, providing end-to-end lifecycle management for creating, updating, enabling, disabling, and deleting alert rules.',
-			'Provision and operate cloud-native services on AKS using Terraform, Helm, ArgoCD, and Istio, with gRPC/Protobuf for inter-service communication, maintaining 99.99% availability for the rules domain.',
-			'Mentor junior engineers through system design, code reviews, debugging, and implementation, helping them take ownership of production services and reinforcing team engineering standards.',
-			'Use Cursor, Claude, and Codex to accelerate repository-wide implementation, refactoring, test generation, debugging, and code review, validating generated changes through automated testing and peer review.',
-		],
-	},
-	{
-		role: 'Software Engineer',
-		company: 'Digital Shadows',
-		location: 'London, United Kingdom',
-		start: { label: 'Nov 2021', iso: '2021-11' },
-		end: { label: 'Nov 2022', iso: '2022-11' },
-		highlights: [
-			'Designed, built, and deployed a Java/Spring service to production within four months, processing more than 1 million social-platform messages to identify customer-exposed sensitive data, including payment card information and confidential files.',
-			'Built automated detection and triage workflows that surfaced high-confidence exposures to customers for investigation and streamlined downstream takedown requests.',
-			'Implemented the event-driven service using Spring, RabbitMQ, and Docker and provisioned its AWS infrastructure, including S3 and EC2, using Terraform.',
-		],
-	},
-	{
-		role: 'Software Engineering Intern',
-		company: 'NatWest Markets',
-		location: 'London, United Kingdom',
-		start: { label: 'Jun 2019', iso: '2019-06' },
-		end: { label: 'Sep 2019', iso: '2019-09' },
-		highlights: [
-			'Built and shipped a production system mapping 75% of logical and physical data flows across NatWest Markets’ application estate.',
-			'Presented the system and findings to senior leadership, including the CTO.',
-		],
-	},
-];
-
-const projects = [
-	{
-		name: 'Evaluating Language Models for Frame Identification in News Articles',
-		stack: 'Python, PyTorch, Scikit-Learn, NumPy, Pandas, Hugging Face',
-		start: { label: 'Jun 2020', iso: '2020-06' },
-		end: { label: 'Jun 2021', iso: '2021-06' },
-		highlights: [
-			'Built two NLP models using Aspect-Based Sentiment Analysis to identify media frames in news articles, achieving a 10% improvement in precision and recall over the state of the art at the time.',
-			'Submitted findings for publication, contributing to research in automated frame identification.',
-		],
-	},
-];
-
-const skillGroups = [
-	{
-		label: 'Languages',
-		items: ['Go', 'Java', 'TypeScript', 'Python', 'SQL', 'C/C++', 'Bash'],
-	},
-	{
-		label: 'Backend & Distributed Systems',
-		items: ['gRPC/Protobuf', 'Spring', 'RabbitMQ', 'REST APIs', 'Kafka'],
-	},
-	{
-		label: 'Infrastructure & Observability',
-		items: [
-			'Kubernetes (AKS)',
-			'Terraform',
-			'Docker',
-			'Azure',
-			'AWS (S3/EC2)',
-			'Helm',
-			'Istio',
-			'ArgoCD',
-			'Prometheus',
-			'Grafana',
-			'Splunk',
-		],
-	},
-	{ label: 'Frontend', items: ['Angular'] },
-	{ label: 'AI-Assisted Engineering', items: ['Cursor', 'Claude', 'Codex'] },
-];
+// Data lives in src/data/cv.json behind the schema'd `cv` collection (see
+// content.config.ts); this page is only its renderer.
+const entry = await getEntry('cv', 'main');
+if (!entry) throw new Error('CV entry "main" missing from src/data/cv.json');
+const { experience, projects, skillGroups, education } = entry.data;
 ---
 
 <Layout
@@ -117,19 +39,19 @@ const skillGroups = [
 				<div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
 					<div>
 					<h1 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
-						Eugene Agyeman
+						{site.name}
 					</h1>
 						<p class="mt-1 text-lg font-medium text-slate-600">Senior Software Engineer</p>
-						<p class="text-sm text-slate-500 mt-1">London, United Kingdom</p>
+						<p class="text-sm text-slate-500 mt-1">{site.location}</p>
 					</div>
 					<div class="sm:text-right text-sm space-y-1">
 						<a
-							href={`mailto:${email}`}
+							href={`mailto:${site.email}`}
 							class="block text-slate-700 hover:text-cyan-700 transition-colors break-all"
-							>{email}</a
+							>{site.email}</a
 						>
 						<a
-							href={linkedin}
+							href={site.links.linkedin}
 							rel="noopener noreferrer"
 							target="_blank"
 							class="block text-slate-700 hover:text-cyan-700 transition-colors"
@@ -241,12 +163,12 @@ const skillGroups = [
 							Education
 						</h2>
 						<div>
-							<h3 class="font-bold text-slate-900">University of Southampton</h3>
-							<p class="text-sm text-slate-600 mt-0.5">BSc Computer Science</p>
-							<p class="text-sm text-slate-500">Upper Second Class Honours</p>
+							<h3 class="font-bold text-slate-900">{education.institution}</h3>
+							<p class="text-sm text-slate-600 mt-0.5">{education.degree}</p>
+							<p class="text-sm text-slate-500">{education.honours}</p>
 							<p class="text-sm text-slate-500 mt-1 tabular-nums">
-							<time datetime="2016-09">Sep 2016</time> – <time datetime="2021-06">Jun 2021</time>
-						</p>
+								<time datetime={education.start.iso}>{education.start.label}</time> – <time datetime={education.end.iso}>{education.end.label}</time>
+							</p>
 						</div>
 					</section>
 				</div>
@@ -277,3 +199,4 @@ const skillGroups = [
 		}
 	</style>
 </Layout>
+

@@ -37,7 +37,7 @@ typography:
   body:
     fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
     fontSize: "1.125rem"
-    fontWeight: 400
+    fontWeight: 450
     lineHeight: 1.625
   label:
     fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
@@ -141,7 +141,7 @@ A high-voltage monochrome built on one saturated blue, punctured by a single war
 - **Headline** (800, 1.875rem–2.25rem, 1.2): Section and page headings ("Under construction", CV name in uppercase).
 - **Title** (700, 1.125rem, 1.4): Role and company names, card values, blog post titles.
 - **Section** (700, 1.5rem, 1.2, tracking-tight): A standalone section heading that carries its own weight ("A typical day", the "Curriculum Vitae" page label). White on blue, Electric Cyan in dark mode.
-- **Body** (400, 1.125rem, 1.625): All prose. Light theme at rgba(255,255,255,0.9); dark theme at slate-400. Constrain to a comfortable measure (the site reads at `max-w-2xl`, ~42rem).
+- **Body** (450, 1.125rem, 1.625): All prose. Light theme at rgba(255,255,255,0.9); dark theme at slate-400. Constrain to a comfortable measure (the site reads at `max-w-2xl`, ~42rem). The half-step above 400 exists because white-on-blue renders optically thin; the variable font makes it free.
 - **Label** (600, 0.875rem, tracking-wide): Nav links, contact card labels, blog post meta. CV section headings step further: 700, 0.75rem, uppercase, tracking 0.18em.
 
 ### Named Rules
@@ -193,11 +193,11 @@ Form language is soft-rectangular but restrained. Cards and images use a 16px ra
 None in the system. The site is static and has no forms; contact is via direct links, and the theme control is a button, not a field. A future field should inherit the hairline, translucent-pane language above.
 
 ### Navigation
-- **Style:** A fixed header, 80px tall, coloured with the page surface at 90% opacity plus backdrop blur, closed by a hairline bottom border. The wordmark is the full name in 1.5rem weight 700. Links are 14px weight 500, `text-white/90` on blue and `slate-400` on black, brightening to full white on hover.
+- **Style:** A fixed header, 80px tall, coloured with the page surface at 90% opacity plus backdrop blur, closed by a hairline bottom border. The wordmark is the full name in 1.5rem weight 700. Links are 14px weight 600, `text-white/90` on blue and `slate-400` on black, brightening to full white on hover; the current page's link steps to weight 700 at full white.
 - **Mobile:** At `<md`, links collapse into a disclosure menu that slides below the header on the same surface; the menu toggle is an icon button beside the theme control, with open/close icons swapped and `aria-expanded` maintained.
 
 ### Theme Toggle
-An icon-only button (sun in dark mode, moon in light mode) at `text-white/95` / dark `slate-400`, 8px radius, 10px padding, 2px focus ring. It is one of only two client-side scripts on the site and must stay dependency-free. Because the page colour is set by CSP-hashed inline script, any change to this or the boot script requires regenerating the `_headers` hashes.
+An icon-only button (sun in dark mode, moon in light mode) at `text-white/95` / dark `slate-400`, 8px radius, 10px padding, 2px focus ring. It is one of only two client-side scripts on the site and must stay dependency-free. The page colour is set by a CSP-hashed inline script; the hashes are derived from the build output automatically by `scripts/sync-csp.mjs` during `npm run build`, so script edits need no manual step.
 
 ### Section Labels
 A standalone section heading that carries its own weight ("A typical day", "Curriculum Vitae") is 24px (`text-2xl`), weight 700, tracking-tight, at full white on blue and Electric Cyan in dark. The smaller 14px, weight 600, tracking-wide label survives for meta lines such as the blog post date; there is no eyebrow above a headline. CV document section headings are a separate, denser pedigree inside the white paper: 12px, weight 700, uppercase, tracking 0.18em, with a hairline underline.

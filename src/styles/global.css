@@ -46,6 +46,13 @@
     scrollbar-gutter: stable;
   }
 
+  body {
+    /* 450 rather than 400: white-on-blue renders optically thin, and the
+       variable font makes the half-step free. Explicit weight classes
+       (medium, semibold, …) still override this. */
+    font-weight: 450;
+  }
+
   /* Both site surfaces (blue and black) carry light text, so native controls
      and scrollbars should render dark; the white CV document is the exception. */
   :root {

@@ -29,7 +29,7 @@ A first-person account of operating real-time systems at scale, told with the ho
 
 - Day job: full-stack engineer on real-time operations at Axon, owning the rules domain end-to-end (data model, APIs, real-time evaluation in Go, operator tooling, cloud operations).
 - Writing is managed as Markdown/MDX content-collection entries in the repo.
-- The CV exists twice: an HTML page maintained in the repo and a PDF exported from LaTeX source kept in Overleaf, maintained separately and liable to drift.
+- The CV exists twice: an HTML page rendered from the schema'd `cv` content collection (`src/data/cv.json`) and a PDF exported from LaTeX source kept in Overleaf, maintained separately and liable to drift.
 - Deployment is a static Astro build served as Cloudflare Workers assets.
 
 ## Capabilities and Constraints
@@ -39,7 +39,7 @@ A first-person account of operating real-time systems at scale, told with the ho
 - Blog collection schema: `title`, `description`, `pubDate`, optional `updatedDate`; slug from filename.
 - The "Thoughts" blog is intentionally empty for now and will carry mixed technical and personal writing.
 - Deployed assets-only to Cloudflare Workers via GitHub Actions on push to `main`.
-- CSP is enforced with SHA-256 hashes tied to the exact inline script text; changing those scripts requires regenerating the hashes or the site fails to boot.
+- CSP is enforced with SHA-256 hashes tied to the exact inline script text. The hashes are derived from the build output by `scripts/sync-csp.mjs`, which runs as part of `npm run build` and rewrites `public/_headers` and `dist/_headers` — scripts can be edited freely.
 - `/cv` prints as a paper document; print styles are part of the page's contract.
 
 ## Brand Commitments
