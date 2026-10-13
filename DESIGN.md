@@ -4,7 +4,7 @@ description: A bold, broadcast-blue personal site for a London software engineer
 colors:
   electric-klein: "#0000f2"
   ink-black: "#000000"
-  electric-cyan: "#22d3ee"
+  electric-accent: "#ffffff"
   document-cyan: "#0e7490"
   document-cyan-bright: "#06b6d4"
   paper-white: "#ffffff"
@@ -110,7 +110,7 @@ A high-voltage monochrome built on one saturated blue, punctured by a single war
 
 ### Primary
 - **Electric Klein** (#0000f2): The defining colour. It is the light-theme page, header, and footer surface (`bg-electric`) and the text colour for primary buttons on white. Carried at full strength; never tinted toward pastel. It is the brand *and* the background.
-- **Electric Cyan** (#22d3ee): The dark-theme accent and the bright end of the site's cyan family. Marks section headings, inline links, and blog post meta.
+- **Electric Accent** (#ffffff, white): The dark-theme accent. Marks section headings, inline links, and blog post meta. White keeps the dark theme monochrome, matching the light theme's type.
 - **Document Cyan** (#0e7490 on white; #06b6d4 for the timeline dot): The white CV document's own accent — company names, link hovers, the timeline dot, the focus outline, and text selection. A cool counterpoint chosen so the document's accents read as accents against the Electric Klein background rather than blending into it.
 
 ### Neutral

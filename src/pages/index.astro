@@ -5,7 +5,7 @@ import hero from '../assets/hero.jpg';
 ---
 
 <Layout title="Eugene Agyeman | Software Engineer">
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+  <section id="hero" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 flex-1 flex items-center">
     <div class="grid sm:grid-cols-[1fr_300px] gap-10 sm:gap-14 items-center">
       <div class="space-y-6">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-white dark:text-white tracking-tight leading-[1.1]">
@@ -43,3 +43,12 @@ import hero from '../assets/hero.jpg';
     </div>
   </section>
 </Layout>
+
+<style is:global>
+  /* Let the hero fill the space <main> has left after the header and footer,
+     so its content centres without extending the page. Only applies here. */
+  main:has(#hero) {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
