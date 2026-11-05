@@ -6,17 +6,26 @@
 				"role": "Software Engineer II, Real-Time Operations",
 				"company": "Axon",
 				"location": "London, United Kingdom",
-				"start": { "label": "Apr 2023", "iso": "2023-04" },
+				"start": { "label": "Jul 2024", "iso": "2024-07" },
 				"end": null,
 				"highlights": [
 					"Own the rules domain end-to-end within Axon’s Real-Time Alerts platform, from data modelling, APIs, and real-time evaluation to operator tooling and cloud operations, for around 20,000 agencies and 1M+ users globally.",
 					"Built a low-latency rule engine in Go that evaluates real-time events against agency-defined alert rules across a platform processing more than 400 million events annually, applying role, proximity, and permission conditions while delivering alerts with p99 latency under 1.5 seconds.",
 					"Designed the rules data model and REST APIs and built the operator-facing Rule Editor in Angular, providing end-to-end lifecycle management for creating, updating, enabling, disabling, and deleting alert rules.",
-					"Led design and delivery of an evidence bundling feature (team of two) that turns evidence and metadata into court-admissible PDFs for prosecution and defence under CPS guidance, with security and retention built in; 72,000+ bundles created globally since its 2024 launch.",
 					"Led design and implementation of alert dismissal and restore (team of four), cascading through parent and child alerts up to the user's point in the alert sequence and syncing in real time across web and mobile; 100M+ dismissals since its 2026 launch, and alerts panel usage doubled.",
 					"Led a series of smaller projects to enhance the product experience, from design through to delivery.",
 					"Provision and operate cloud-native services on AKS using Terraform, Helm, ArgoCD, and Istio, with gRPC/Protobuf for inter-service communication, maintaining 99.99% availability for the rules domain.",
 					"Mentor junior engineers through system design, code reviews, debugging, and implementation, helping them take ownership of production services and reinforcing team engineering standards."
+				]
+			},
+			{
+				"role": "Software Engineer, Digital Evidence Management",
+				"company": "Axon",
+				"location": "London, United Kingdom",
+				"start": { "label": "Apr 2023", "iso": "2023-04" },
+				"end": { "label": "Jul 2024", "iso": "2024-07" },
+				"highlights": [
+					"Led design and delivery of an evidence bundling feature (team of two) that turns evidence and metadata into court-admissible PDFs for prosecution and defence under CPS guidance, with security and retention built in; 72,000+ bundles created globally since its 2024 launch."
 				]
 			},
 			{
