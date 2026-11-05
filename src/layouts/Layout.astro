@@ -1,93 +1,125 @@
 ---
-import '../styles/global.css';
-import Header from '../components/Header.astro';
-import { site } from '../lib/site';
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import { site } from "../lib/site";
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
 }
 
 const { title, description = site.description } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL('/og-image.jpg', Astro.site);
+const ogImageURL = new URL("/og-image.jpg", Astro.site);
+
+const elsewhere = [
+  { href: site.links.github, label: "GitHub" },
+  { href: site.links.linkedin, label: "LinkedIn" },
+];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#070707"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
 
-		<link rel="canonical" href={canonicalURL} />
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={site.name} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:image" content={ogImageURL} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImageURL} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <!-- Theme Initialization Script (Prevents Flash). This script must stay
          inline and dependency-free, so it re-declares the storage key from
          src/lib/theme.mjs literally — keep the two in sync. -->
     <script is:inline>
-      const theme = localStorage.getItem('theme');
-      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
+      const theme = localStorage.getItem("theme");
+      if (
+        theme === "dark" ||
+        (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     </script>
 
     <noscript>
       <style>
-        /* Without JavaScript the theme toggle cannot work, so hide it. The
-           mobile menu is a JS disclosure, so reveal the links rather than
-           leaving mobile visitors without navigation. These ids are owned by
-           THEME_IDS in src/lib/theme.mjs — CSS selectors can't import, so
-           keep them in sync. */
+        /* Without JavaScript the theme toggle cannot work, so hide it. This id
+           is owned by THEME_IDS in src/lib/theme.mjs — CSS selectors can't
+           import, so keep them in sync. */
         #theme-toggle {
           display: none;
         }
-        @media (max-width: 767px) {
-          #menu-toggle {
-            display: none;
-          }
-          #mobile-menu {
-            display: block;
-          }
-        }
       </style>
     </noscript>
-	</head>
-	<body class="bg-electric dark:bg-black print:bg-white text-white dark:text-slate-200 min-h-screen flex flex-col font-sans antialiased selection:bg-white/30 selection:text-white print:min-h-0 print:block">
+  </head>
+  <body class="min-h-screen flex flex-col print:min-h-0 print:block">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[color:var(--color-electric)]"
+      class="chip sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-5 focus:z-50"
     >
       Skip to content
     </a>
 
     <Header />
 
-		<main id="main" class="flex-grow pt-20 print:pt-0">
-			<slot />
-		</main>
+    <main
+      id="main"
+      class="shell flex-1 pt-20 pb-20 print:pt-6 print:pb-0 print:max-w-none print:px-0"
+    >
+      <slot />
+    </main>
 
-    <footer class="site-footer border-t border-white/20 dark:border-white/5 bg-electric dark:bg-black py-12 transition-colors duration-300">
-      <div class="max-w-4xl mx-auto px-4 text-center text-white/95 dark:text-slate-400 text-sm font-bold">
-        <p>&copy; {new Date().getFullYear()} {site.name}</p>
-        <p class="mt-1 font-normal text-white/90 dark:text-slate-400">Built with ❤️ from London, 🇬🇧</p>
-      </div>
+    <footer class="site-footer shell pb-10 text-label uppercase">
+      <p class="text-muted" aria-hidden="true">–––</p>
+      <ul class="mt-2 flex flex-wrap gap-x-2">
+        {
+          elsewhere.map((item, i) => (
+            <li>
+              {i > 0 && (
+                <span class="text-muted" aria-hidden="true">
+                  |{" "}
+                </span>
+              )}
+              <a
+                href={item.href}
+                class="navlink"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-2 text-muted">
+        {`© ${new Date().getFullYear()} ${site.name}. Built with 💖 from London.`}
+      </p>
     </footer>
-	</body>
+  </body>
 </html>

@@ -1,54 +1,72 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import hero from '../assets/hero.jpg';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import hero from "../assets/hero.jpg";
 ---
 
 <Layout title="Eugene Agyeman | Software Engineer">
-  <section id="hero" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 flex-1 flex items-center">
-    <div class="grid sm:grid-cols-[1fr_300px] gap-10 sm:gap-14 items-center">
-      <div class="space-y-6">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-white dark:text-white tracking-tight leading-[1.1]">
-            Hey, I'm Eugene.<br />
-          I Love Tech. A&nbsp;lot.
-        </h1>
-
-        <p class="text-xl text-white/90 dark:text-slate-400 leading-relaxed">
-          Engineer based in London. Currently making real-time systems not fall over.
-        </p>
-
-        <div class="pt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
-          <a href="/about" class="text-white dark:text-white border-b border-white dark:border-white hover:border-white/50 dark:hover:border-slate-400 hover:text-white/90 dark:hover:text-slate-300 transition-all font-medium pb-0.5">
-            More about me &rarr;
-          </a>
-          <a href="/cv" class="text-sm text-white/95 hover:text-white dark:text-slate-400 dark:hover:text-white transition-colors">
-            Or go straight to the CV
-          </a>
-        </div>
-      </div>
-
-      {/* Density-based srcset: the fallback `src` is the 300px-wide 1x image
-          (~20KB) instead of the full 1536px original (~343KB) that `widths`
-          would emit, so non-srcset clients stop paying for pixels the CSS
-          never displays. */}
-      <Image
-        src={hero}
-        alt="Eugene at a viewpoint above a lake"
-        width={300}
-        densities={[1, 1.5, 2]}
-        loading="eager"
-        fetchpriority="high"
-        class="w-full max-w-[300px] mx-auto sm:max-w-none sm:mx-0 aspect-[3/4] object-cover rounded-2xl ring-1 ring-white/15"
-      />
+  <div
+    class="grid gap-x-20 gap-y-12 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:grid-rows-[auto_1fr]"
+  >
+    <div class="space-y-6">
+      <h1 class="text-display">
+        Hey, I'm Eugene.<br />
+        I Love Computers. A lot.
+      </h1>
+      <p class="text-lead">
+        Software engineer in London. I look after the rules engine behind
+        Axon's real-time alerts, mostly in Go, and make sure it doesn't fall
+        over.
+      </p>
     </div>
-  </section>
-</Layout>
 
-<style is:global>
-  /* Let the hero fill the space <main> has left after the header and footer,
-     so its content centres without extending the page. Only applies here. */
-  main:has(#hero) {
-    display: flex;
-    flex-direction: column;
-  }
-</style>
+    {
+      /* Density-based srcset: the fallback `src` is the 300px-wide 1x image
+        (~20KB) instead of the full 1536px original (~343KB) that `widths`
+        would emit, so non-srcset clients stop paying for pixels the CSS
+        never displays. The figure sits beside the intro at lg and follows it
+        on narrower screens. */
+    }
+    <figure
+      class="lg:row-span-2 lg:row-start-1 lg:col-start-2 w-full max-w-[360px] lg:justify-self-start"
+    >
+      <div class="border border-dashed border-line p-3">
+        <Image
+          src={hero}
+          alt="Eugene at a viewpoint above a lake"
+          width={300}
+          densities={[1, 1.5, 2]}
+          loading="eager"
+          fetchpriority="high"
+          class="w-full aspect-[3/4] object-cover"
+        />
+      </div>
+    </figure>
+
+    <div class="space-y-6 lg:col-start-1">
+      <div>
+        <p>Elsewhere:</p>
+        <ul class="mt-2">
+          <li>
+            <span class="text-muted" aria-hidden="true">* </span><a
+              href="/about"
+              class="link">More about me -&gt;</a
+            >
+          </li>
+          <li>
+            <span class="text-muted" aria-hidden="true">* </span><a
+              href="/cv"
+              class="link">Read the CV -&gt;</a
+            >
+          </li>
+          <li>
+            <span class="text-muted" aria-hidden="true">* </span><a
+              href="/contact"
+              class="link">Get in touch -&gt;</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>

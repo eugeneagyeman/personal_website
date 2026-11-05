@@ -18,5 +18,14 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
+  // Code blocks follow the site theme: Shiki emits both palettes as CSS
+  // variables and global.css picks one from the `.dark` class.
+  markdown: {
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false
+    }
+  },
+
   integrations: [mdx()]
 });

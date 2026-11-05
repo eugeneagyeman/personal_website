@@ -1,12 +1,12 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { site } from '../lib/site';
-import { THEME_IDS } from '../lib/theme.mjs';
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About Me' },
+  { href: '/about', label: 'About' },
   { href: '/blog', label: 'Thoughts' },
+  { href: '/cv', label: 'CV' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -14,105 +14,30 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<header class="site-header fixed top-0 w-full z-50 bg-electric/90 dark:bg-black/90 border-b border-white/20 dark:border-white/5 transition-all duration-300 backdrop-blur-sm">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href="/" class="text-2xl font-bold text-white dark:text-white hover:text-white/95 dark:hover:text-slate-300 transition-colors">
-        {site.name}
-      </a>
+<header class="site-header shell pt-10">
+  <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+    <a href="/" class="block uppercase" aria-label={`${site.name}, home`}>
+      <span class="block text-lead font-bold">{site.name} <span aria-hidden="true">█</span></span>
+      <span class="block text-body text-muted">Software engineer</span>
+    </a>
 
-      <!-- Navigation, theme toggle and mobile menu sit together so the two
-           controls stay adjacent instead of being spread by justify-between -->
-      <div class="flex items-center gap-5 md:gap-6">
-        <nav class="hidden md:flex space-x-8">
+    <div class="flex flex-col items-start md:items-end text-label uppercase">
+      <nav aria-label="Primary" class="bracket">
+        <ul class="inline">
           {links.map((link) => (
-            <a
-              href={link.href}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              class:list={[
-                'text-sm transition-colors duration-200',
-                isActive(link.href)
-                  ? 'font-bold text-white dark:text-white'
-                  : 'font-semibold text-white/90 dark:text-slate-400 hover:text-white dark:hover:text-white',
-              ]}
-            >
-              {link.label}
-            </a>
+            <li class="inline nav-item">
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class="navlink"
+              >
+                {link.label}
+              </a>
+            </li>
           ))}
-        </nav>
-
-        <ThemeToggle />
-
-        <!-- Mobile menu toggle -->
-        <button
-          id={THEME_IDS.menuToggle}
-          type="button"
-          aria-expanded="false"
-          aria-controls={THEME_IDS.mobileMenu}
-          class="md:hidden -ml-2 text-white/90 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors"
-        >
-          <span class="sr-only">Toggle menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-      </div>
+        </ul>
+      </nav>
+      <ThemeToggle />
     </div>
   </div>
-
-  <nav
-    id={THEME_IDS.mobileMenu}
-    aria-label="Mobile"
-    class="hidden md:hidden border-t border-white/20 dark:border-white/5 bg-electric dark:bg-black"
-  >
-    <ul class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-      {links.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-            class:list={[
-              'block py-3 text-base transition-colors',
-              isActive(link.href)
-                ? 'font-bold text-white dark:text-white'
-                : 'font-semibold text-white/90 dark:text-slate-400 hover:text-white dark:hover:text-white',
-            ]}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
 </header>
-
-<script define:vars={{ THEME_IDS }}>
-  const toggle = document.getElementById(THEME_IDS.menuToggle);
-  const menu = document.getElementById(THEME_IDS.mobileMenu);
-  const iconOpen = document.getElementById('menu-icon-open');
-  const iconClose = document.getElementById('menu-icon-close');
-
-  const setOpen = (open) => {
-    toggle?.setAttribute('aria-expanded', String(open));
-    menu?.classList.toggle('hidden', !open);
-    iconOpen?.classList.toggle('hidden', open);
-    iconClose?.classList.toggle('hidden', !open);
-  };
-
-  toggle?.addEventListener('click', () => {
-    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
-  });
-
-  menu?.addEventListener('click', (event) => {
-    if (event.target instanceof HTMLAnchorElement) setOpen(false);
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      setOpen(false);
-      toggle?.focus();
-    }
-  });
-</script>
