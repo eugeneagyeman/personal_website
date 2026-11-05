@@ -9,15 +9,14 @@
 				"start": { "label": "Apr 2023", "iso": "2023-04" },
 				"end": null,
 				"highlights": [
-					"Own the rules domain end-to-end within Axon’s Real-Time Alerts platform, spanning data modelling, APIs, real-time evaluation, operator tooling, and cloud operations for a platform available to approximately 20,000 agencies and more than 1 million users globally.",
+					"Own the rules domain end-to-end within Axon’s Real-Time Alerts platform, from data modelling, APIs, and real-time evaluation to operator tooling and cloud operations, for around 20,000 agencies and 1M+ users globally.",
 					"Built a low-latency rule engine in Go that evaluates real-time events against agency-defined alert rules across a platform processing more than 400 million events annually, applying role, proximity, and permission conditions while delivering alerts with p99 latency under 1.5 seconds.",
 					"Designed the rules data model and REST APIs and built the operator-facing Rule Editor in Angular, providing end-to-end lifecycle management for creating, updating, enabling, disabling, and deleting alert rules.",
-					"Led design and delivery of an evidence bundling feature in a team of two, letting users collate evidence and metadata into court-admissible PDFs shared with prosecution and defence in line with CPS guidance, with security and retention requirements designed in; more than 72,000 bundles created globally since its 2024 launch.",
-					"Led design and implementation of alert dismissal and restore in a team of four: dismissals cascade through parent and child alerts, apply only up to the point in the alert sequence the user acted on, and stay synchronised in real time across every web and mobile session. More than 100 million alerts dismissed since its 2026 launch, and alerts panel usage doubled.",
+					"Led design and delivery of an evidence bundling feature (team of two) that turns evidence and metadata into court-admissible PDFs for prosecution and defence under CPS guidance, with security and retention built in; 72,000+ bundles created globally since its 2024 launch.",
+					"Led design and implementation of alert dismissal and restore (team of four), cascading through parent and child alerts up to the user's point in the alert sequence and syncing in real time across web and mobile; 100M+ dismissals since its 2026 launch, and alerts panel usage doubled.",
 					"Led a series of smaller projects to enhance the product experience, from design through to delivery.",
 					"Provision and operate cloud-native services on AKS using Terraform, Helm, ArgoCD, and Istio, with gRPC/Protobuf for inter-service communication, maintaining 99.99% availability for the rules domain.",
-					"Mentor junior engineers through system design, code reviews, debugging, and implementation, helping them take ownership of production services and reinforcing team engineering standards.",
-					"Use Cursor, Claude, and Codex to accelerate repository-wide implementation, refactoring, test generation, debugging, and code review, validating generated changes through automated testing and peer review."
+					"Mentor junior engineers through system design, code reviews, debugging, and implementation, helping them take ownership of production services and reinforcing team engineering standards."
 				]
 			},
 			{
@@ -27,7 +26,7 @@
 				"start": { "label": "Nov 2021", "iso": "2021-11" },
 				"end": { "label": "Nov 2022", "iso": "2022-11" },
 				"highlights": [
-					"Designed, built, and deployed a Java/Spring service to production within four months, processing more than 1 million social-platform messages to identify customer-exposed sensitive data, including payment card information and confidential files.",
+					"Designed, built, and deployed a Java/Spring service to production within four months, processing 1M+ social-platform messages to identify customer-exposed sensitive data such as payment cards and confidential files.",
 					"Built automated detection and triage workflows that surfaced high-confidence exposures to customers for investigation and streamlined downstream takedown requests.",
 					"Implemented the event-driven service using Spring, RabbitMQ, and Docker and provisioned its AWS infrastructure, including S3 and EC2, using Terraform."
 				]
@@ -39,8 +38,7 @@
 				"start": { "label": "Jun 2019", "iso": "2019-06" },
 				"end": { "label": "Sep 2019", "iso": "2019-09" },
 				"highlights": [
-					"Built and shipped a production system mapping 75% of logical and physical data flows across NatWest Markets’ application estate.",
-					"Presented the system and findings to senior leadership, including the CTO."
+					"Built and shipped a production system mapping 75% of logical and physical data flows across NatWest Markets’ application estate, and presented it to senior leadership, including the CTO."
 				]
 			}
 		],
@@ -51,8 +49,7 @@
 				"start": { "label": "Jun 2020", "iso": "2020-06" },
 				"end": { "label": "Jun 2021", "iso": "2021-06" },
 				"highlights": [
-					"Built two NLP models using Aspect-Based Sentiment Analysis to identify media frames in news articles, achieving a 10% improvement in precision and recall over the state of the art at the time.",
-					"Submitted findings for publication, contributing to research in automated frame identification."
+					"Built two NLP models using Aspect-Based Sentiment Analysis to identify media frames in news articles, achieving a 10% improvement in precision and recall over the state of the art at the time; findings submitted for publication."
 				]
 			}
 		],
