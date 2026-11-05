@@ -27,20 +27,20 @@ A first-person account of operating real-time systems at scale, told with the ho
 
 ## Operating Context
 
-- Day job: full-stack engineer on real-time operations at Axon, owning the rules domain end-to-end (data model, APIs, real-time evaluation in Go, operator tooling, cloud operations).
+- Day job: Software Engineer II (full-stack) on real-time operations at Axon, owning the rules domain end-to-end (data model, APIs, real-time evaluation in Go, operator tooling, cloud operations).
 - Writing is managed as Markdown/MDX content-collection entries in the repo.
 - The CV exists twice: an HTML page rendered from the schema'd `cv` content collection (`src/data/cv.json`) and a PDF exported from LaTeX source kept in Overleaf, maintained separately and liable to drift.
 - Deployment is a static Astro build served as Cloudflare Workers assets.
 
 ## Capabilities and Constraints
 
-- Static Astro site, no hydrated components; the only client-side scripts are the theme toggle and the mobile menu.
+- Static Astro site, no hydrated components; the only client-side scripts are the theme initialiser and the theme toggle. Navigation is plain wrapping links, with no menu script.
 - Dark mode is class-based, set by an inline script to avoid a flash of the wrong theme.
 - Blog collection schema: `title`, `description`, `pubDate`, optional `updatedDate`; slug from filename.
 - The "Thoughts" blog is intentionally empty for now and will carry mixed technical and personal writing.
 - Deployed assets-only to Cloudflare Workers via GitHub Actions on push to `main`.
 - CSP is enforced with SHA-256 hashes tied to the exact inline script text. The hashes are derived from the build output by `scripts/sync-csp.mjs`, which runs as part of `npm run build` and rewrites `public/_headers` and `dist/_headers` — scripts can be edited freely.
-- `/cv` prints as a paper document; print styles are part of the page's contract.
+- `/cv` prints as a paper document (A4, three columns, no site chrome); print styles are part of the page's contract. On screen it is the same plain-text document as every other page, with no paper card.
 
 ## Brand Commitments
 
@@ -53,13 +53,13 @@ A first-person account of operating real-time systems at scale, told with the ho
 - A real hero photograph at `src/assets/hero.jpg` (Eugene at a viewpoint above a lake).
 - The CV PDF at `public/eugene-agyeman-cv.pdf`.
 - No blog posts exist yet, and there are no testimonials, press, or case studies — future work must not fabricate any.
-- `public/favicon.svg` is a personal mark: a white "EA" monogram on an Electric Klein rounded square.
-- `public/og-image.jpg` (1200×630, cropped from the hero photo) backs the Open Graph/Twitter meta emitted by `src/layouts/Layout.astro`; absolute URLs come from `site` in `astro.config.mjs`.
+- `public/favicon.svg` is a personal mark: a white pixel-grid "EA" monogram on a near-black rounded square.
+- `public/og-image.jpg` (1200×630, a near-black card with the name, tagline and the hero photo in a dashed frame) backs the Open Graph/Twitter meta emitted by `src/layouts/Layout.astro`; absolute URLs come from `site` in `astro.config.mjs`.
 
 ## Product Principles
 
 1. Honest first-person voice over polished corporate tone — it should read like Eugene, not like a template.
 2. Serve many reasons for visiting without a single forced funnel; every page must be self-sufficient.
 3. Show real work and real numbers; never invent credentials, clients, or praise.
-4. Keep the site fast and static; JavaScript is a last resort, and the only exceptions are the theme toggle and mobile menu.
+4. Keep the site fast and static; JavaScript is a last resort, and the only exception is the theme initialiser and toggle.
 5. Preserve the warmth while tightening the copy — the voice is the differentiator, but it should not drift into rambling.

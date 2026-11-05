@@ -1,8 +1,9 @@
 {
 	"main": {
+		"headline": "Software Engineer · Real-Time Systems",
 		"experience": [
 			{
-				"role": "Full Stack Software Engineer, Real-Time Operations",
+				"role": "Software Engineer II, Real-Time Operations",
 				"company": "Axon",
 				"location": "London, United Kingdom",
 				"start": { "label": "Apr 2023", "iso": "2023-04" },
@@ -11,6 +12,9 @@
 					"Own the rules domain end-to-end within Axon’s Real-Time Alerts platform, spanning data modelling, APIs, real-time evaluation, operator tooling, and cloud operations for a platform available to approximately 20,000 agencies and more than 1 million users globally.",
 					"Built a low-latency rule engine in Go that evaluates real-time events against agency-defined alert rules across a platform processing more than 400 million events annually, applying role, proximity, and permission conditions while delivering alerts with p99 latency under 1.5 seconds.",
 					"Designed the rules data model and REST APIs and built the operator-facing Rule Editor in Angular, providing end-to-end lifecycle management for creating, updating, enabling, disabling, and deleting alert rules.",
+					"Led design and delivery of an evidence bundling feature in a team of two, letting users collate evidence and metadata into court-admissible PDFs shared with prosecution and defence in line with CPS guidance, with security and retention requirements designed in; more than 72,000 bundles created globally since its 2024 launch.",
+					"Led design and implementation of alert dismissal and restore in a team of four: dismissals cascade through parent and child alerts, apply only up to the point in the alert sequence the user acted on, and stay synchronised in real time across every web and mobile session. More than 100 million alerts dismissed since its 2026 launch, and alerts panel usage doubled.",
+					"Led a series of smaller projects to enhance the product experience, from design through to delivery.",
 					"Provision and operate cloud-native services on AKS using Terraform, Helm, ArgoCD, and Istio, with gRPC/Protobuf for inter-service communication, maintaining 99.99% availability for the rules domain.",
 					"Mentor junior engineers through system design, code reviews, debugging, and implementation, helping them take ownership of production services and reinforcing team engineering standards.",
 					"Use Cursor, Claude, and Codex to accelerate repository-wide implementation, refactoring, test generation, debugging, and code review, validating generated changes through automated testing and peer review."
@@ -80,12 +84,18 @@
 			{ "label": "Frontend", "items": ["Angular"] },
 			{ "label": "AI-Assisted Engineering", "items": ["Cursor", "Claude", "Codex"] }
 		],
-		"education": {
+		"education": [{
+			"institution": "Georgia Tech",
+			"degree": "Master of Science in Computer Science",
+			"status": "Incoming",
+			"start": { "label": "Jan 2027", "iso": "2027-01"},
+			"end": {"label": "Sep 2030", "iso": "2030-09"}
+		},{
 			"institution": "University of Southampton",
 			"degree": "BSc Computer Science",
 			"honours": "Upper Second Class Honours",
 			"start": { "label": "Sep 2016", "iso": "2016-09" },
 			"end": { "label": "Jun 2021", "iso": "2021-06" }
-		}
+		}]
 	}
 }

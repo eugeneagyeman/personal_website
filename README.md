@@ -2,7 +2,7 @@
 
 Source for [eugeneagyeman.io](https://eugeneagyeman.io) — a static Astro site
 served as Cloudflare Workers assets. No framework components, no hydration; the
-only client-side scripts are the theme toggle and the mobile menu.
+only client-side scripts are the theme initialiser and the theme toggle.
 
 ## Commands
 
@@ -30,7 +30,7 @@ src/
 ├── layouts/       Layout, BlogPost
 ├── lib/           site.ts (identity facts), theme.mjs (theme contract)
 ├── pages/         One file per route
-└── styles/        Tokens and global CSS
+└── styles/        Theme tokens, Geist Mono faces, document components, print rules
 ```
 
 Routes: `/`, `/about`, `/cv`, `/contact`, `/blog`.
@@ -45,6 +45,14 @@ the contact page and `eugene@` for the CV and its PDF.
 `npm run build` and rewrites the `script-src` directive in `public/_headers` from
 the built inline scripts. Edit scripts freely; just commit the regenerated
 `_headers`. A stale hash shows up as `Refused to execute inline script`.
+
+**Type is Geist Mono only, and the glyph set matters.** Fonts are self-hosted from
+`public/fonts/` in three subsets (latin, latin-ext, symbols). Arrows such as `→` and `↗`
+are in none of them and would silently fall back to a system font, so use ASCII `->`.
+
+**Colour comes from theme variables.** `:root` and `.dark` in `src/styles/global.css`
+define `--bg`, `--fg`, `--muted`, `--line`, `--link`; Tailwind exposes them as
+`bg-bg`, `text-muted`, and so on. There are no `dark:` colour utilities to maintain.
 
 **The CV exists twice.** HTML is rendered from `src/data/cv.json` behind the
 schema in `src/content.config.ts`; the PDF is exported from LaTeX in Overleaf and

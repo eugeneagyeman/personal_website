@@ -1,227 +1,214 @@
 ---
 name: Eugene Agyeman — Personal Site
-description: A bold, broadcast-blue personal site for a London software engineer.
+description: A plain-text, mono-set personal site for a London software engineer, drawn as a checked-out document.
 colors:
-  electric-klein: "#0000f2"
-  ink-black: "#000000"
-  electric-accent: "#ffffff"
-  document-cyan: "#0e7490"
-  document-cyan-bright: "#06b6d4"
-  paper-white: "#ffffff"
-  steel-muted: "#94a3b8"
-  mist-hairline: "#e2e8f0"
+  paper: "#ffffff"
+  ink: "#070708"
+  graphite: "#5f5f66"
+  hairline: "rgba(7,7,8,0.16)"
+  link-blue: "#1f6fbf"
+  night: "#070707"
+  chalk: "#e8e8ea"
+  ash: "#9a9aa2"
+  hairline-night: "rgba(232,232,234,0.16)"
+  link-blue-night: "#69b1ff"
+  klein: "#0000f2"
+  print-ink: "#000000"
 typography:
-  display:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "clamp(2.25rem, 6vw, 3rem)"
-    fontWeight: 800
-    lineHeight: 1.1
-    letterSpacing: "-0.025em"
-  headline:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "1.875rem"
-    fontWeight: 800
-    lineHeight: 1.2
-    letterSpacing: "-0.025em"
-  title:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "1.125rem"
-    fontWeight: 700
-    lineHeight: 1.4
-  section:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "1.5rem"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "-0.025em"
   body:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "1.125rem"
-    fontWeight: 450
-    lineHeight: 1.625
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: "24px"
+  heading:
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "14px"
+    fontWeight: 700
+    lineHeight: "24px"
+  home-heading:
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "22.43px"
+    fontWeight: 700
+    lineHeight: "32px"
+  home-lead:
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "17.72px"
+    fontWeight: 400
+    lineHeight: "28px"
   label:
-    fontFamily: '"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "0.875rem"
-    fontWeight: 600
-    lineHeight: 1.4
-    letterSpacing: "0.025em"
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "12.44px"
+    fontWeight: 400
+    lineHeight: "20px"
+  chip:
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+    fontSize: "11.06px"
+    fontWeight: 700
+    lineHeight: "24px"
 rounded:
+  none: "0px"
   sm: "4px"
   md: "8px"
-  lg: "16px"
-  full: "9999px"
+  lg: "12px"
 spacing:
   xs: "8px"
   sm: "16px"
   md: "24px"
-  lg: "32px"
-  xl: "40px"
+  lg: "48px"
+  xl: "80px"
 components:
-  button-primary:
-    backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.electric-klein}"
-    rounded: "{rounded.md}"
-    padding: "10px 20px"
-  button-primary-hover:
-    backgroundColor: "rgba(255,255,255,0.85)"
-  button-pill:
+  chip:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.none}"
+    padding: "0 10px"
+  chip-night:
+    backgroundColor: "{colors.chalk}"
+    textColor: "{colors.night}"
+  panel:
     backgroundColor: "transparent"
-    textColor: "{colors.paper-white}"
-    rounded: "{rounded.full}"
-    padding: "10px 20px"
-  card-contact:
-    backgroundColor: "rgba(255,255,255,0.1)"
     rounded: "{rounded.lg}"
-    padding: "24px"
-  card-paper:
-    backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.ink-black}"
-    rounded: "{rounded.lg}"
-    padding: "32px"
-  chip-skill:
-    backgroundColor: "#f1f5f9"
-    textColor: "#334155"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
+    padding: "20px 24px"
+  button-download:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.md}"
+    padding: "10px 16px"
+  button-download-night:
+    backgroundColor: "{colors.chalk}"
+    textColor: "{colors.night}"
 ---
 
 # Design System: Eugene Agyeman — Personal Site
 
 ## Overview
 
-**Creative North Star: "The Broadcast"**
+**Creative North Star: "The Checked-Out Document"**
 
-The site runs on a single, unmissable signal: Electric Klein, a saturated ultramarine that floods the entire "light" theme — page, header, and footer alike. This is not a background colour used sparingly; it is the broadcast itself. Against it, everything else is a hard, confident counterpoint: solid white type, hairline borders, flat surfaces, and a total absence of decoration. The effect is a screen that announces itself rather than one that recedes, which matches the site's purpose as a personal home base that has to work for recruiters, peers, and casual visitors alike.
+The site is a plain-text document pulled out of a store: one measured column of monospaced type, a second column for a framed photograph, ASCII for the odd sign, dashed rules for panels, and nothing decorative a reader could not have typed. The reference is code.storage's spec-sheet register, adapted for reading rather than copied: 14px type on 24px leading and a 560px column instead of 12px/24px/500px.
 
-At night the signal inverts. The black theme drops to true black and swaps the blue for a bright accent that marks attention: section labels, links, and the small status dots beside CV roles. The accent is the one place colour is allowed to speak in dark mode; everything else is a cool slate hierarchy over black. This two-world structure — a flooded blue day, a quiet black night — is the system's defining move.
+There are two grounds and no chromatic surface: white paper by day, near-black `#070707` by night. Colour is reserved for links, which are blue with a half-opacity underline, and for text selection, which is Klein blue, the colour the site was built on before this redesign. Everything else is ink, graphite, or hairline. The terminal is the grammar, not a costume: there is no prompt, no scanline, and no blinking cursor, and the one block caret beside the name is static.
 
-The build is deliberately unfussy. Components state what they are and step aside: buttons are flat rectangles or simple pills, cards are translucent panes on the coloured surface, and depth is drawn with borders and rings rather than shadows. The one exception is the CV, which lifts off the surface as a white "paper" artefact with a real shadow, because it is a document, not a panel. Warmth comes through the copy and the human touches, never through ornament.
+Hierarchy is built without size. Headings are the same 14px as body, set bold and uppercase, led by a muted `#` or `##` marker. Weight, case, spacing, and a 48px gap between sections do the work that scale does elsewhere.
 
 **Key Characteristics:**
-- One dominant surface colour (Electric Klein) carried at full saturation, not as an accent.
-- Two named worlds: a flooded blue light theme and a true-black dark theme.
-- Flat by default; depth from hairlines, rings, and translucency.
-- A single warm accent reserved for attention in dark mode.
-- Hard, confident typography — heavy weights, tight tracking, generous line height on body.
+- Geist Mono only, on one 9/8 modular scale: 14px/24px body, 12.44px labels and ASCII, 11.06px caption chips.
+- White or `#070707` grounds; blue links; Klein-blue selection. No gradients, no shadows, no filled panes.
+- One 560px document column; the shell is 1200px with 20px/40px gutters.
+- Dashed 12px panels carry structure; the photograph is a framed artefact with no caption.
+- Static header with a two-line brand block and bracketed, wrapping navigation; no menu script.
 
 ## Colors
 
-A high-voltage monochrome built on one saturated blue, punctured by a single warm signal.
+A two-ground monochrome with a single functional blue and a Klein-blue selection.
 
 ### Primary
-- **Electric Klein** (#0000f2): The defining colour. It is the light-theme page, header, and footer surface (`bg-electric`) and the text colour for primary buttons on white. Carried at full strength; never tinted toward pastel. It is the brand *and* the background.
-- **Electric Accent** (#ffffff, white): The dark-theme accent. Marks section headings, inline links, and blog post meta. White keeps the dark theme monochrome, matching the light theme's type.
-- **Document Cyan** (#0e7490 on white; #06b6d4 for the timeline dot): The white CV document's own accent — company names, link hovers, the timeline dot, the focus outline, and text selection. A cool counterpoint chosen so the document's accents read as accents against the Electric Klein background rather than blending into it.
+- **Link Blue** (#1f6fbf on paper; #69b1ff on night): The only chromatic colour in the reading surface. Links, panel values, and the focus ring. Darker and lighter than code.storage's own blue so it clears 4.5:1 at body size (5.14:1 on white, 8.95:1 on `#070707`).
 
 ### Neutral
-- **Ink Black** (#000000): The dark-theme page, header, and footer surface. True black, not near-black, for maximum contrast with the blue day theme.
-- **Paper White** (#ffffff): White type on the blue and black surfaces; also the CV paper card surface.
-- **Chalk White** (rgba(255,255,255,0.9)–0.95): Light-theme body copy and secondary text. White is almost never used at 100% for prose.
-- **Steel Muted** (#94a3b8 / slate-400): Dark-theme body copy, nav links, and muted prose.
-- **Frost Panel** (rgba(255,255,255,0.1)–0.15): Translucent card and icon-circle fills on the coloured surface.
-- **Mist Hairline** (#e2e8f0 / slate-200): Borders and dividers inside the white CV paper.
+- **Paper** (#ffffff): Light ground.
+- **Ink** (#070708): Light text, and the chip and download-button fill.
+- **Graphite** (#5f5f66): Muted text on paper: labels, meta, the `#` prefixes, bullets (5.29:1).
+- **Hairline** (rgba(7,7,8,0.16)): Dashed borders, rules, and scrollbar thumbs on paper.
+- **Night** (#070707): Dark ground.
+- **Chalk** (#e8e8ea): Dark text, and the chip and button fill on night.
+- **Ash** (#9a9aa2): Muted text on night.
+- **Hairline Night** (rgba(232,232,234,0.16)): Dashed borders and rules on night.
+- **Klein** (#0000f2, text #ffffff): `::selection` in both themes. White on Klein is about 9:1.
+- **Print Ink** (#000000): Text and links on the printed CV only, on white.
 
 ### Named Rules
-**The Flooded Surface Rule.** Electric Klein is a surface, not a highlight. Any screen in the light theme is expected to sit *on* the blue, not beside it. Do not reduce it to a chip or an underline.
+**The Links-Only Colour Rule.** Blue marks something you can follow. It is never decoration, never a heading, never a badge. Klein blue appears only as selection.
 
-**The Accent-Not-The-Background Rule.** The defining background colour is never reused as an accent on top of itself. Accents that sit on the white CV document use Document Cyan, not Electric Klein, so they separate from the page rather than disappearing into it.
-
-**The One Signal Family Rule.** A single accent family — cyan — carries all emphasis. Dark surfaces take the bright Electric Cyan; the white CV document takes its deeper Document Cyan. There is no second accent hue. If everything is accented, nothing is.
+**The Tokens-Flip Rule.** Components use semantic variables (`--bg`, `--fg`, `--muted`, `--line`, `--link`, `--chip-bg`, `--chip-fg`). The `.dark` class swaps the values; no component carries a `dark:` colour utility.
 
 ## Typography
 
-**Display Font:** Schibsted Grotesk (variable, 400–900, self-hosted), falling back to the system sans (`ui-sans-serif`, `system-ui`).
-**Body Font:** same family.
-**Label/Mono Font:** none distinct; labels use the same family in a heavier weight.
+**Display Font:** none; the site has no display face.
+**Body Font:** Geist Mono (variable 100–900, SIL OFL 1.1, self-hosted in latin, latin-ext, and symbols subsets), falling back to `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`.
+**Label/Mono Font:** the same.
 
-**Character:** One self-hosted variable grotesque used everywhere, so the site sounds the same on every device. The voice is set by weight and spacing, not by a second typeface — heavy extrabold headlines with tight tracking against generously led body copy. Numbers in the CV are tabular so dates and metrics align.
+**Character:** One mono face for everything, so the site reads as a single typed document. The face carries no arrows; use ASCII `->`, never `→` or `↗`, which would fall back to a system font.
 
 ### Hierarchy
-- **Display** (800, clamp(2.25rem → 3rem), 1.1, tracking-tight): Page-defining headlines ("Hey, I'm Eugene.", "Say hello."). Used at most once per viewport.
-- **Headline** (800, 1.875rem–2.25rem, 1.2): Section and page headings ("Under construction", CV name in uppercase).
-- **Title** (700, 1.125rem, 1.4): Role and company names, card values, blog post titles.
-- **Section** (700, 1.5rem, 1.2, tracking-tight): A standalone section heading that carries its own weight ("A typical day", the "Curriculum Vitae" page label). White on blue, Electric Cyan in dark mode.
-- **Body** (450, 1.125rem, 1.625): All prose. Light theme at rgba(255,255,255,0.9); dark theme at slate-400. Constrain to a comfortable measure (the site reads at `max-w-2xl`, ~42rem). The half-step above 400 exists because white-on-blue renders optically thin; the variable font makes it free.
-- **Label** (600, 0.875rem, tracking-wide): Nav links, contact card labels, blog post meta. CV section headings step further: 700, 0.75rem, uppercase, tracking 0.18em.
+Every size is the 14px body multiplied by a whole power of 9/8 (1.125). Text smaller than body steps down one power at a time; text larger than body steps up two at a time (×1.266), so each jump between neighbouring roles is the same fraction. Sizes are tokens in `global.css` (`text-chip`, `text-label`, `text-body`, `text-lead`, `text-display`); never write a literal font size. Line heights sit on a 4px grid. Print is the exception: the CV prints on its own 8.5pt scale.
+
+| Role | Power | Size / line |
+| --- | --- | --- |
+| Display | +4 | 22.43px / 32px |
+| Lead | +2 | 17.72px / 28px |
+| Body, headings | 0 | 14px / 24px |
+| Label | −1 | 12.44px / 20px |
+| Chip | −2 | 11.06px / 24px box |
+
+- **Heading** (700, body size, uppercase): h1, h2, h3 are one size. The home h1 is the one exception at display size, and its lead paragraph is lead size. h1 gets a muted `# ` prefix and h2 a muted `## ` prefix via CSS; h3 has none. In a document (`.flow`, `.doc-prose`), the h1 is followed by 36px rather than 24px, and every h2 carries a dashed rule beneath it, the same treatment as the CV's section headings. On the printed CV, headings follow the 8.5pt body.
+- **Body** (400, 14px, 24px): All prose, about 66 characters per line at 560px.
+- **Label** (400–500, 12.44px, 20px, uppercase): Navigation, bracket links, footer, meta lines, ASCII blocks, inline code.
+- **Chip** (700, 11.06px, 24px box, uppercase): Inverted caption labels.
 
 ### Named Rules
-**The Weight-Not-Faces Rule.** Hierarchy is built from weight and size within one family. Never introduce a second display typeface to create contrast; use weight, scale, and tracking instead.
+**The No-Size-Jump Rule.** Never raise a heading's font size. Use weight, case, the prefix, and space.
 
 ## Layout
 
-A single centred column governs everything. The working container is `max-w-4xl` (56rem) with responsive gutters of `px-4` → `sm:px-6` → `lg:px-8` (16px → 24px → 32px). Reading content narrows to `max-w-2xl` (42rem) on the About page and `max-w-3xl` (48rem) for blog prose, so lines stay short even when the shell is wide.
+A static header, then one document column. The shell is `1200px` wide with 20px gutters, 40px from `lg` (1024px). Prose and headings sit in a left-aligned 560px column (`.doc`); nothing is centred. The header has 40px top padding and the first content sits 80px below it. Vertical rhythm follows the 24px body line: blocks inside a document are separated by 24px, sections by 48px.
 
-The header is fixed at `h-20` (80px) with the page's colour and a hairline bottom border at 90% opacity plus a backdrop blur; the main region is offset by `pt-20` to match. Sections are separated by full-bleed 1px top borders rather than by gaps, giving the page a continuous, ruled feel. Vertical rhythm runs on a 4px base: 16px (`py-2.5`/`p-4`), 24px (`p-6`), 32px (`p-8`/`mt-8`), and 40px (`p-10`), with generous page padding of 80–128px (`py-20`–`py-32`).
+The home page is a two-column grid from `lg`, `minmax(0, 560px) minmax(0, 1fr)` with an 80px gap: intro and links on the left, a framed photograph on the right. Below `lg` it is one column and the figure follows the intro paragraph. On contact, the email panel spans the full row and the LinkedIn and GitHub panels sit two across beneath it from `sm`. The CV is two-thirds and one-third at `lg` and prints as three columns.
 
-Two signature arrangements recur. The home hero is an asymmetric grid (`sm:grid-cols-[1fr_300px]`) pairing fluid text with a fixed 300px portrait. The CV is a two-thirds / one-third split at `lg` (`lg:grid-cols-3`, main content spanning 2 columns) that collapses to a single column on smaller screens and prints as a three-column document.
-
-Breakpoints follow Tailwind defaults: `sm` 640px, `md` 768px, `lg` 1024px. Structure changes once, at `sm`/`md`; `lg` only widens gutters and the CV.
+ASCII tables are wide by nature: each lives in a focusable `.ascii-wrap` that scrolls horizontally inside itself so the page never overflows.
 
 ## Elevation & Depth
 
-Flat by default. The system conveys layering with colour and line, not shadow: hairline borders (`border-white/20` on blue, `border-white/5` on black), 1px rings (`ring-1 ring-white/15` on the hero image, `ring-1 ring-slate-900/5` on the CV paper), and translucent white fills (`bg-white/10`–`/15`) that read as panes sitting on the coloured surface. There is no stack of elevations and no ambient shadow vocabulary.
-
-The single lifted artefact is the CV: a white paper card with `shadow-xl` and a faint dark ring, deliberately raised so it reads as a physical document laid on the blue or black surface. That break in the flat rule is meaningful only because nothing else breaks it.
+Flat. There are no shadows, gradients, or filled panes. Depth comes from dashed borders, a solid border on hover, and inverted chips. The only filled controls are the chip and the CV download button.
 
 ### Named Rules
-**The Flat-By-Default Rule.** Surfaces are flat at rest. Depth is expressed with borders, rings, and translucency; shadow appears only on the CV paper artefact, where it signals "document", not "elevation".
+**The Dashed-Means-Container Rule.** A 1px dashed hairline marks a container (panel, photo frame, code block, section rule). Solid lines are reserved for the CV print output and the hover/focus state of a panel.
 
 ## Shapes
 
-Form language is soft-rectangular but restrained. Cards and images use a 16px radius (`rounded-2xl`); buttons use 8px (`rounded-lg`); small chips use 4px (`rounded`); the one pill-shaped control is the CV download button (`rounded-full`), which earns its shape by being a self-contained download action. Borders are always 1px hairlines; rings are 1px. There are no decorative outlines, no double borders, no gradient fills, and no clipping or angled geometry — the interest comes from the surface colour and the grid, not the silhouette.
+Mostly square. Panels and code blocks use a 12px radius; the download button 8px; inline code 4px; chips, the photo frame, and the figure itself have no radius. Borders are always 1px. There is no clipping, no angled geometry, and no ring or glow.
 
 ## Components
 
-### Buttons
-- **Shape:** 8px radius for standard buttons (`rounded-lg`); the pill variant uses a full radius.
-- **Primary:** Solid Paper White background with Electric Klein text (white-on-blue inverted; the text drops to Ink Black in dark mode so it stays legible against the white fill). Padding 10px / 20px (`px-5 py-2.5`), weight 500. This is the "View CV" action on the About page.
-- **Hover / Focus:** Primary dims to `bg-white/85`. The pill variant fills to `bg-white/10` on hover. Focus is a 2px ring at `ring-white/30`.
-- **Secondary / Ghost (pill):** Transparent with a hairline `border-white/50`, white text, and an inline download glyph. Used for "Download PDF" on the CV — deliberately the only pill in the system.
-
-### Chips
-- **Style:** Paper-white-adjacent `bg-slate-100` fill with slate-700 text, 4px radius, 12px text at weight 500. Used for the technical-skill tags on the CV paper only.
-- **State:** Static; not interactive.
-
-### Cards / Containers
-- **Corner Style:** 16px radius (`rounded-2xl`).
-- **Background:** Two families. On the coloured surface, translucent Frost Panels (`bg-white/10`, hover `bg-white/15`). On the CV, opaque Paper White.
-- **Shadow Strategy:** None on translucent panes (they float on tone); `shadow-xl` on the CV paper only. See Elevation & Depth.
-- **Border:** Hairline — `border-white/60` on contact cards (hover `border-white/85`) so the pane is perceivable against the saturated blue; the CV paper uses a `ring-1 ring-slate-900/5`.
-- **Internal Padding:** 24px for contact cards (`p-6`); 32–40px for the CV paper (`p-8 sm:p-10`).
-
-### Inputs / Fields
-None in the system. The site is static and has no forms; contact is via direct links, and the theme control is a button, not a field. A future field should inherit the hairline, translucent-pane language above.
-
 ### Navigation
-- **Style:** A fixed header, 80px tall, coloured with the page surface at 90% opacity plus backdrop blur, closed by a hairline bottom border. The wordmark is the full name in 1.5rem weight 700. Links are 14px weight 600, `text-white/90` on blue and `slate-400` on black, brightening to full white on hover; the current page's link steps to weight 700 at full white.
-- **Mobile:** At `<md`, links collapse into a disclosure menu that slides below the header on the same surface; the menu toggle is an icon button beside the theme control, with open/close icons swapped and `aria-expanded` maintained.
+A two-line brand block at left (name at lead size, bold, with a static `█` caret, then "Software engineer" at body size, muted) and a bracketed link row at right: `[ HOME / ABOUT / THOUGHTS / CV / CONTACT ]`, with the theme control beneath it. Label size, uppercase. The current page is bold with a half-opacity underline; hover shows the same underline. Links wrap naturally on narrow screens, so there is no disclosure menu and no menu script.
 
 ### Theme Toggle
-An icon-only button (sun in dark mode, moon in light mode) at `text-white/95` / dark `slate-400`, 8px radius, 10px padding, 2px focus ring. It is one of only two client-side scripts on the site and must stay dependency-free. The page colour is set by a CSP-hashed inline script; the hashes are derived from the build output automatically by `scripts/sync-csp.mjs` during `npm run build`, so script edits need no manual step.
+A bracket text control that names the theme it will switch to (`[ DARK ]` or `[ LIGHT ]`). Both labels are in the markup and CSS shows one, so there is no flash. It is one of two client scripts, with the inline initialiser in `Layout.astro`; both are CSP-hashed by `scripts/sync-csp.mjs` at build.
 
-### Section Labels
-A standalone section heading that carries its own weight ("A typical day", "Curriculum Vitae") is 24px (`text-2xl`), weight 700, tracking-tight, at full white on blue and Electric Cyan in dark. The smaller 14px, weight 600, tracking-wide label survives for meta lines such as the blog post date; there is no eyebrow above a headline. CV document section headings are a separate, denser pedigree inside the white paper: 12px, weight 700, uppercase, tracking 0.18em, with a hairline underline.
+### Links
+Blue, weight 500, underlined at 50% opacity with a 3px offset; hover raises the underline to full. Bracket links (`.bracket`) wrap the label in `[ ]` for primary actions such as "View CV" and "Back home".
 
-### Contact Card
-The primary "reach me" component. A translucent pane (16px radius, `border-white/60` at rest, `white/85` on hover) holding a 44px circular icon badge with a hairline ring, a muted 12px label, an 18px semibold value, and a muted one-line note. A 16px arrow sits at the trailing edge — up-right for external destinations that open in a new tab, right for internal ones — and brightens on hover. The value underlines on hover; the pane never lifts or casts a shadow.
+### Chips
+Inverted caption labels: chip size, bold, uppercase, `0 10px` padding, no radius, ink on paper and chalk on night. They label contact channels. The hero photograph has no caption; its description lives in the `alt` text. The skip link is a chip.
+
+### Panels
+1px dashed hairline, 12px radius, 20px 24px padding, no fill. On hover or focus the border turns solid in the foreground colour; the panel never lifts or casts a shadow. Used for contact channels: email, LinkedIn, GitHub. The CV is not a contact channel and is reached from the navigation.
+
+### ASCII Tables
+Label size on a 20px line, `white-space: pre`, generated from data so columns cannot drift, kept to ASCII characters. Used for the empty-state sign on Thoughts; the home page has none.
+
+### Figure
+The hero photograph sits inside a 1px dashed frame with 12px of inner padding and no radius. It carries no visible caption.
+
+### CV
+Screen: the same document, with section headings (`## EXPERIENCE`) ruled by a dashed line, `- ` bullets, comma-separated skills, and a filled `DOWNLOAD PDF` button. Education is a list; a course not yet started carries a muted status line ("Incoming") above its dates. Print: A4 with 12mm margins, 8.5pt type, three columns, solid rules, black links, no site chrome, and entries that do not split across pages.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** carry Electric Klein at full saturation as a surface. It is the broadcast, not a highlight.
-- **Do** build hierarchy from weight and scale inside the single system font stack; keep display headlines at weight 800 with tight tracking.
-- **Do** express depth with hairlines, 1px rings, and translucent white fills; reserve the one shadow for the CV paper.
-- **Do** reserve the cyan accent for attention in dark mode only.
-- **Do** keep the white CV document's accents in Document Cyan, distinct from the Electric Klein background.
-- **Do** give a standalone section heading real size (`text-2xl`); reserve the 14px label for an eyebrow above a headline.
-- **Do** keep the JS surface to the theme toggle and the mobile menu, and regenerate the CSP hashes whenever either inline script changes.
-- **Do** set body copy at the muted white/slate step and hold a reading measure near 42rem.
-- **Do** keep the CV's two-column-at-`lg`, three-column-in-print structure and tabular numerals.
+- **Do** keep every heading at body size (the home h1 excepted) and let weight, case, prefix, and spacing carry hierarchy.
+- **Do** use ASCII `->` for arrows and build tables from data.
+- **Do** colour only links blue and only selection Klein blue.
+- **Do** use semantic tokens so a component works in both themes without variants.
+- **Do** keep scrollable ASCII inside a focusable `.ascii-wrap`.
+- **Do** keep the prose column at 560px, left-aligned.
+- **Do** take every font size from the 9/8 scale tokens.
 
 ### Don't:
-- **Don't** tint, gradient, or pastelise Electric Klein — no soft blues, no gradient fills.
-- **Don't** introduce a second display typeface for contrast.
-- **Don't** add ambient shadows or layered elevation beyond the CV artefact.
-- **Don't** scatter the cyan accent across a screen; if everything is accent, the signal is lost.
-- **Don't** add decorative borders, angled geometry, or textured backgrounds — the colour and grid do the work.
-- **Don't** put marketing/hero copy in a corporate register; the voice is first-person and warm (see PRODUCT.md).
+- **Don't** add shadows, gradients, glass, or filled cards.
+- **Don't** introduce a second typeface or a heading size jump.
+- **Don't** use `→`, `↗`, or emoji: Geist Mono has no glyph for them and they fall back to a system font. The one deliberate exception is the heart in the footer's "Built with" line.
+- **Don't** add an eyebrow or kicker above a heading.
+- **Don't** emulate a terminal: no prompt, scanlines, glow, or blinking cursor.
+- **Don't** add a menu script; the navigation wraps.

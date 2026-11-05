@@ -19,6 +19,9 @@ const periodPoint = z.object({ label: z.string(), iso: z.string() });
 const cv = defineCollection({
 	loader: file('src/data/cv.json'),
 	schema: z.object({
+		// The line under the name: a description of the work, not a job title.
+		// Job titles live on each experience entry and must match the employer's.
+		headline: z.string(),
 		experience: z.array(
 			z.object({
 				role: z.string(),
@@ -39,13 +42,17 @@ const cv = defineCollection({
 			}),
 		),
 		skillGroups: z.array(z.object({ label: z.string(), items: z.array(z.string()) })),
-		education: z.object({
-			institution: z.string(),
-			degree: z.string(),
-			honours: z.string(),
-			start: periodPoint,
-			end: periodPoint,
-		}),
+		education: z.array(
+			z.object({
+				institution: z.string(),
+				degree: z.string(),
+				honours: z.string().optional(),
+				// Set for a course not yet started, e.g. "Incoming".
+				status: z.string().optional(),
+				start: periodPoint,
+				end: periodPoint,
+			}),
+		),
 	}),
 });
 

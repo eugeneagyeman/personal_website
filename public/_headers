@@ -8,4 +8,4 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-3swV7pI3GPKLRfNyMJ/iZXscQesdAs5xN0b3EhaL768=' 'sha256-MttQCq4Wq6qk6bVY7iczGGr/mPLCtDbq/i7SQV4uggQ=' 'sha256-axLT5/SUX6Qo32qmS0FSNKSfad1YQgy9+Z5FC9aw/xA='
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-SX8N9vArn6xbFHpaWeyUkCA3i9tL31uiKhVfxVK9Lzo=' 'sha256-wdjEMm8y0Inj91xEkDmM0vOBFslcupYbGb1KLfOpEmQ='

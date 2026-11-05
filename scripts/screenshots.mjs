@@ -42,7 +42,14 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
 		const page = await context.newPage();
 		for (const [path, name] of routes) {
 			await page.goto(base + path, { waitUntil: 'load' });
-			await page.evaluate(() => document.fonts.ready);
+			// Images decode asynchronously, so wait for them as well as the fonts
+			// or the capture can show an empty frame.
+			await page.evaluate(() =>
+				Promise.all([
+					document.fonts.ready,
+					...[...document.images].map((img) => img.decode().catch(() => {})),
+				]),
+			);
 			await page.screenshot({
 				path: `${outDir}/${name}-${vpName}-${theme}.png`,
 				fullPage: true,

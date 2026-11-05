@@ -6,80 +6,55 @@ import Layout from '../layouts/Layout.astro';
 	title="About | Eugene Agyeman"
 	description="Eugene Agyeman is a software engineer in London working on real-time backend systems, mostly in Go."
 >
-	<section class="max-w-2xl mx-auto px-4 sm:px-6 py-20">
-		<h1
-			class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white dark:text-white leading-[1.1]"
-		>
-			Hey!
-		</h1>
+	<div class="doc flow">
+		<h1>Hey!</h1>
 
-		<div class="mt-8 space-y-5 text-lg text-white/90 dark:text-slate-400 leading-relaxed">
-			<p>
-				I build backend systems, mostly in Go. I'm more interested in what happens
-				when the volume is ten times what anyone planned for than in writing the service
-				itself.
-			</p>
-			<p>
-				These days I work on the rules behind a real-time alerting product. Agencies write the
-				rules, events come in, and the system decides whether someone needs to know. I look
-				after the whole path: the data model, the evaluation, and the screens our own
-				operators use to manage it. In practice, that means I'm the one who gets paged.
-			</p>
-		</div>
-	</section>
+		<p>
+			Backend software, mostly in Go, is what I write. The best part is when the volume
+			turns out to be ten times what anyone planned for.
+		</p>
+		<p>
+			My day job is the rules side of a real-time alerting product used by around 20,000
+			agencies and more than a million people worldwide. Agencies write the rules, events come in, and the system decides whether
+			someone needs to know. The whole thing is mine to look after: the data model, the
+			evaluation, and the screens our own operators use.
+		</p>
+		<p>
+			Beyond the rules, I've led other projects at Axon: evidence bundles that hold
+			up in court, alert dismissals that sync across every device, and a run of smaller
+			ones to make the product nicer to use.
+		</p>
 
-	<section class="border-t border-white/20 dark:border-white/5">
-		<div class="max-w-2xl mx-auto px-4 sm:px-6 py-16">
-			<h2 class="text-2xl font-bold tracking-tight text-white dark:text-white mb-6">
-				A typical day
-			</h2>
-			<div class="space-y-5 text-lg text-white/90 dark:text-slate-400 leading-relaxed">
-				<p>
-					Mostly back and forth. There's design work early, a few reviews, a fair bit of
-					back-and-forth with the people using the thing I'm building, and then whatever
-					needs fixing.
-				</p>
-				<p>
-					I still write a good amount of code. I just rarely get to do it in one go.
-				</p>
-			</div>
-		</div>
-	</section>
+		<h2>A typical day</h2>
+		<p>
+			Design takes up a good part of my time: working through the problem and turning
+			it into a plan the rest of the team can build from. Then there are reviews, time
+			with our product manager on what we build next, and keeping the engineers building it
+			unblocked. Code still gets plenty of my time, just rarely in one sitting.
+		</p>
 
-	<section class="border-t border-white/20 dark:border-white/5">
-		<div class="max-w-2xl mx-auto px-4 sm:px-6 py-16">
-			<h2 class="text-2xl font-bold tracking-tight text-white dark:text-white mb-6">
-				Outside of that
-			</h2>
-			<div class="space-y-5 text-lg text-white/90 dark:text-slate-400 leading-relaxed">
-				<p>
-					I'm returning to cooking, and the pizzas have come out well. I'm also returning
-					to running, which is going less well. There is a lot of returning to do at the
-					moment.
-				</p>
-				<p>
-					Music is a constant. Getting away is the other one, and the further the better. I
-					collect countries rather than going back to the same ones.
-				</p>
-				<p>
-					I don't read enough, which is something I'd like to sort out. I do go back to
-					newsletters and Hacker News and pick out what's worth knowing.
-				</p>
-			</div>
-		</div>
-	</section>
+		<h2>Outside of that</h2>
+		<p>
+			Cooking is back on the menu (the pizzas have come out well), and so is running
+			(less well). Lots of returning to do at the moment.
+		</p>
+		<p>
+			Music is always on, and there's more returning here too: Backstreet Boys and
+			Jodeci are both back in heavy rotation. I've seen Asake live, in a tux.
+		</p>
+		<p>
+			Travel takes me as far as I can get. Given the choice, a new country beats going
+			back to an old one.
+		</p>
+		<p>
+			Most of my reading is newsletters and Hacker News, picking out what's worth
+			knowing. Books are next, and I'm on the hunt for good ones, fiction and
+			non-fiction. Recommendations welcome.
+		</p>
 
-	<section class="border-t border-white/20 dark:border-white/5">
-		<div class="max-w-2xl mx-auto px-4 sm:px-6 py-16">
-			<p class="text-lg text-white/90 dark:text-slate-400 leading-relaxed mb-6">
-				The detail's in the CV: the stack, the projects, the numbers.
-			</p>
-			<a
-				href="/cv"
-				class="inline-block bg-white text-[color:var(--color-electric)] dark:text-black px-5 py-2.5 rounded-lg font-medium hover:bg-white/85 transition-colors"
-			>
-				View CV
-			</a>
-		</div>
-	</section>
+		<p class="mt-12">
+			That's the person. The work, with the numbers attached, is on the CV.
+		</p>
+		<p><a href="/cv" class="link bracket">View CV</a></p>
+	</div>
 </Layout>
