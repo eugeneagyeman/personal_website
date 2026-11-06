@@ -34,7 +34,8 @@ A first-person account of operating real-time systems at scale, told with the ho
 
 ## Capabilities and Constraints
 
-- Static Astro site, no hydrated components; the only client-side scripts are the theme initialiser and the theme toggle. Navigation is plain wrapping links, with no menu script.
+- Static Astro site, no hydrated components; the only client-side scripts are the theme initialiser, the theme toggle, and the name shell in the header (an editable name whose block caret tracks the cursor and runs a few joke commands from `src/lib/commands.ts`). Navigation is plain wrapping links, with no menu script.
+- The shell's `status` command prints `availability` from `src/lib/site.ts`. It is a public statement about Eugene's job search, so it must only ever say what he has set; never invent or guess it.
 - Dark mode is class-based, set by an inline script to avoid a flash of the wrong theme.
 - Blog collection schema: `title`, `description`, `pubDate`, optional `updatedDate`; slug from filename.
 - The "Thoughts" blog is intentionally empty for now and will carry mixed technical and personal writing.
@@ -61,5 +62,5 @@ A first-person account of operating real-time systems at scale, told with the ho
 1. Honest first-person voice over polished corporate tone — it should read like Eugene, not like a template.
 2. Serve many reasons for visiting without a single forced funnel; every page must be self-sufficient.
 3. Show real work and real numbers; never invent credentials, clients, or praise.
-4. Keep the site fast and static; JavaScript is a last resort, and the only exception is the theme initialiser and toggle.
+4. Keep the site fast and static; JavaScript is a last resort, and the only exceptions are the theme initialiser and toggle and the name shell. The site must work fully without them.
 5. Preserve the warmth while tightening the copy — the voice is the differentiator, but it should not drift into rambling.

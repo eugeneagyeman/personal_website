@@ -2,7 +2,8 @@
 
 Source for [eugeneagyeman.io](https://eugeneagyeman.io) — a static Astro site
 served as Cloudflare Workers assets. No framework components, no hydration; the
-only client-side scripts are the theme initialiser and the theme toggle.
+only client-side scripts are the theme initialiser, the theme toggle, and the
+name shell in the header.
 
 ## Commands
 
@@ -28,7 +29,7 @@ src/
 ├── content/       Blog collection (markdown)
 ├── data/          cv.json — the CV's structured data
 ├── layouts/       Layout, BlogPost
-├── lib/           site.ts (identity facts), theme.mjs (theme contract)
+├── lib/           site.ts (identity facts), theme.mjs (theme contract), commands.ts (name shell)
 ├── pages/         One file per route
 └── styles/        Theme tokens, Geist Mono faces, document components, print rules
 ```
@@ -40,6 +41,11 @@ Routes: `/`, `/about`, `/cv`, `/contact`, `/blog`.
 **Identity facts live in `src/lib/site.ts`.** Name and social links are declared
 once; change them there, not in a page. Two addresses exist on purpose: `hi@` for
 the contact page and `eugene@` for the CV and its PDF.
+
+**The name in the header is a tiny shell.** Click it, type, and press Enter.
+Commands live in `src/lib/commands.ts` as one pure function (add a `case` to add
+one); `Header.astro` only moves the cursor and shows the reply. `status` prints
+`availability` from `src/lib/site.ts`: keep it true, since recruiters read it.
 
 **CSP hashes are derived, not hand-written.** `scripts/sync-csp.mjs` runs inside
 `npm run build` and rewrites the `script-src` directive in `public/_headers` from

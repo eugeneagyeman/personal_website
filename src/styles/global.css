@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* Geist Mono (variable, SIL OFL 1.1), self-hosted. Subsets mirror Google Fonts'
-   latin / latin-ext / symbols split; `symbols` carries the block caret (U+2588)
-   and box-drawing characters used by the header and ASCII panels. */
+   latin / latin-ext / symbols split; `symbols` carries the block and
+   box-drawing characters used by the ASCII panels. */
 @font-face {
   font-family: "Geist Mono";
   font-style: normal;
@@ -37,20 +37,22 @@
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-sans: var(--font-mono);
 
-  /* One modular scale: every size is the 14px body times a whole power of 9/8.
-     Small text steps down one power at a time (label, chip); larger text steps
-     up two at a time (lead, display), so each jump is the same fraction.
-     Line heights sit on a 4px grid. */
-  --text-chip: 11.06px; /* 14 / (9/8)^2 */
-  --text-chip--line-height: 24px;
-  --text-label: 12.44px; /* 14 / (9/8) */
-  --text-label--line-height: 20px;
-  --text-body: 14px;
-  --text-body--line-height: 24px;
-  --text-lead: 17.72px; /* 14 * (9/8)^2 */
-  --text-lead--line-height: 28px;
-  --text-display: 22.43px; /* 14 * (9/8)^4 */
-  --text-display--line-height: 32px;
+  /* One modular scale: each size is the 14px body times a whole power of 9/8,
+     rounded to the nearest pixel. Small text steps down one power at a time
+     (label, chip); larger text steps up two at a time (lead, display). Sizes
+     and line heights are both in rem, so the whole scale grows uniformly with
+     the reader's default font size; at the 16px default, line heights sit on
+     a 4px grid. Pixel values at that default are noted alongside. */
+  --text-chip: 0.6875rem; /* 11px ≈ 14 / (9/8)^2 */
+  --text-chip--line-height: 1.5rem; /* 24px */
+  --text-label: 0.75rem; /* 12px ≈ 14 / (9/8) */
+  --text-label--line-height: 1.25rem; /* 20px */
+  --text-body: 0.875rem; /* 14px */
+  --text-body--line-height: 1.5rem; /* 24px */
+  --text-lead: 1.125rem; /* 18px ≈ 14 * (9/8)^2 */
+  --text-lead--line-height: 1.75rem; /* 28px */
+  --text-display: 1.375rem; /* 22px ≈ 14 * (9/8)^4 */
+  --text-display--line-height: 2rem; /* 32px */
 }
 
 /* Semantic colours resolve at runtime from the theme variables below, so no
@@ -155,6 +157,84 @@
 }
 
 @layer components {
+  /* The editable name in the header (see Header.astro). The field is sized in
+     character cells, one spare for the cursor at the end of the line. */
+  .name-field {
+    position: relative;
+    display: block;
+    width: max-content;
+  }
+
+  .name-field input {
+    width: calc((var(--len) + 1) * 1ch);
+    max-width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-transform: inherit;
+  }
+
+  .name-field input::placeholder {
+    color: var(--muted);
+    opacity: 1;
+  }
+
+  /* Shell input and replies are lowercase, as typed, like a real terminal; the
+     idle name and tagline keep the header's uppercase. Replies keep their
+     spacing, as `ls` does. */
+  .name-field.is-typed input,
+  .name-field.is-typed .caret,
+  .name-reply.is-reply {
+    text-transform: none;
+  }
+
+  .name-reply {
+    white-space: pre-wrap;
+  }
+
+  /* A quieter focus ring than the site default: the dashed rule of the panels. */
+  .name-field input:focus-visible {
+    outline: 1px dashed var(--muted);
+    outline-offset: 4px;
+  }
+
+  /* Once the script is tracking the caret, the block replaces the native one. */
+  .name-field.is-live input {
+    caret-color: transparent;
+  }
+
+  /* Terminal block cursor: a hard on/off blink, like a real cursor, rather
+     than a fade. It sits on the caret's cell and shows that character in
+     inverse. Holds steady under reduced motion and while typing. */
+  .caret {
+    position: absolute;
+    top: 0;
+    left: calc(var(--pos) * 1ch);
+    background: var(--fg);
+    color: var(--bg);
+    pointer-events: none;
+    white-space: pre;
+    animation: caret-blink 1.06s step-end infinite;
+  }
+
+  .name-field.is-typing .caret {
+    animation: none;
+  }
+
+  @keyframes caret-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .caret {
+      animation: none;
+    }
+  }
+
   /* Page frame */
   .shell {
     width: 100%;

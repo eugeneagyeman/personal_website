@@ -10,6 +10,9 @@ export const site = {
 	location: 'London, United Kingdom',
 	description:
 		'Software engineer in London, working on real-time backend systems and writing about what I build.',
+	// Printed by the header shell's `status` command. Edit and redeploy when it
+	// changes.
+	availability: 'Open to the right role',
 	links: {
 		linkedin: 'https://www.linkedin.com/in/eugene-agyeman',
 		github: 'https://github.com/eugeneagyeman',
