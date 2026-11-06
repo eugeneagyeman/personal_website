@@ -7,7 +7,8 @@ name shell in the header.
 
 ## Commands
 
-Requires Node 22.12+.
+Uses Node 26 (LTS), pinned in `.nvmrc` for local tooling and CI. Astro's floor
+is 22.12.
 
 ```sh
 npm install
