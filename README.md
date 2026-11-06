@@ -34,6 +34,10 @@ src/
 └── styles/        Theme tokens, Geist Mono faces, document components, print rules
 ```
 
+Design and product context live in `docs/`: `DESIGN.md` is the source of truth
+for the visual system (tokens, type scale, components, do's and don'ts), and
+`PRODUCT.md` covers audience, purpose, voice, and constraints.
+
 Routes: `/`, `/about`, `/cv`, `/contact`, `/blog`.
 
 ## Things that bite
