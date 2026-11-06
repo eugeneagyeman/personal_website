@@ -16,10 +16,30 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
 <header class="site-header shell pt-10">
   <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-    <a href="/" class="block uppercase" aria-label={`${site.name}, home`}>
-      <span class="block text-lead font-bold">{site.name} <span aria-hidden="true">█</span></span>
-      <span class="block text-body text-muted">Software engineer</span>
-    </a>
+    <div class="uppercase">
+      {/* The name is a real text field and the block is its cursor: a script
+          below moves it to the caret. It doubles as a tiny shell: Enter runs
+          the line through src/lib/commands.ts and the reply borrows the line
+          underneath. The name comes back as soon as the field loses focus.
+          Home stays reachable from the nav. Without JS the field still works,
+          with the block parked at the end. */}
+      <span class="name-field text-lead font-bold" style={`--len: ${site.name.length}; --pos: ${site.name.length}`}>
+        <input
+          id="name-field"
+          type="text"
+          value={site.name}
+          maxlength={32}
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+          enterkeyhint="done"
+          placeholder="type help"
+          aria-label="Name. Try typing help"
+        />
+        <span class="caret" aria-hidden="true">&nbsp;</span>
+      </span>
+      <span class="name-reply block text-body text-muted" aria-live="polite">Software engineer</span>
+    </div>
 
     <div class="flex flex-col items-start md:items-end text-label uppercase">
       <nav aria-label="Primary" class="bracket">
@@ -41,3 +61,101 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     </div>
   </div>
 </header>
+
+<script>
+  import { site } from '../lib/site';
+  import { run } from '../lib/commands';
+
+  const field = document.querySelector<HTMLElement>('.name-field');
+  const input = field?.querySelector('input');
+  const caret = field?.querySelector<HTMLElement>('.caret');
+  const replyLine = document.querySelector<HTMLElement>('.name-reply');
+
+  if (field && input && caret && replyLine) {
+    field.classList.add('is-live');
+    const tagline = replyLine.textContent ?? '';
+    let typingTimer: number | undefined;
+    let replyTimer: number | undefined;
+    // Enter on an untouched name just leaves; only an edited line runs.
+    let edited = false;
+
+    // Place the block on the caret's cell. The face is monospace, so a cell
+    // is exactly 1ch. Like a terminal block, it shows the character under it
+    // in inverse, or an empty cell at the end of the line.
+    const sync = () => {
+      const { value } = input;
+      // An unfocused field reports its caret at 0; park the block at the end.
+      const pos =
+        document.activeElement !== input
+          ? value.length
+          : input.selectionDirection === 'backward'
+            ? (input.selectionStart ?? value.length)
+            : (input.selectionEnd ?? value.length);
+      // An empty field shows its placeholder, so size it to fit that instead.
+      field.style.setProperty('--len', String(value.length || input.placeholder.length));
+      field.style.setProperty('--pos', String(pos));
+      // An empty line shows the placeholder's first letter under the block.
+      const under = value === '' ? input.placeholder[0] : value[pos];
+      caret.textContent = under === undefined || under === ' ' ? '\u00a0' : under;
+      input.scrollLeft = 0;
+    };
+
+    // A real cursor holds steady while you type and resumes blinking after.
+    const holdBlink = () => {
+      field.classList.add('is-typing');
+      clearTimeout(typingTimer);
+      typingTimer = window.setTimeout(() => field.classList.remove('is-typing'), 500);
+    };
+
+    // The reply holds the tagline's place for a few seconds, then hands it back.
+    const say = (reply: string) => {
+      replyLine.textContent = reply;
+      replyLine.classList.add('is-reply');
+      clearTimeout(replyTimer);
+      replyTimer = window.setTimeout(() => {
+        replyLine.textContent = tagline;
+        replyLine.classList.remove('is-reply');
+      }, 4000);
+    };
+
+    // Once something is typed, the line is a shell prompt and shows exactly
+    // what was typed. Only deleting from the name keeps it uppercase.
+    const setTyped = (value: boolean) => field.classList.toggle('is-typed', value);
+
+    input.addEventListener('input', (event) => {
+      edited = true;
+      if ((event as InputEvent).inputType?.startsWith('insert')) setTyped(true);
+      sync();
+      holdBlink();
+    });
+    input.addEventListener('keydown', (event) => {
+      holdBlink();
+      if (event.key === 'Escape') {
+        input.blur();
+      } else if (event.key === 'Enter') {
+        const outcome = edited ? run(input.value) : {};
+        if (outcome.go) window.location.assign(outcome.go);
+        if (outcome.reply) say(outcome.reply);
+        input.blur();
+      } else if (event.key === 'c' && event.ctrlKey && input.selectionStart === input.selectionEnd) {
+        // ^C with nothing selected interrupts, as in a terminal; with a
+        // selection it is left alone to copy.
+        event.preventDefault();
+        input.value += '^C';
+        sync();
+        window.setTimeout(() => input.blur(), 400);
+      }
+    });
+    document.addEventListener('selectionchange', () => {
+      if (document.activeElement === input) sync();
+    });
+    input.addEventListener('blur', () => {
+      input.value = site.name;
+      edited = false;
+      setTyped(false);
+      sync();
+    });
+
+    sync();
+  }
+</script>

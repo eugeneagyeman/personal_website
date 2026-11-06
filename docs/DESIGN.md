@@ -87,7 +87,7 @@ components:
 
 The site is a plain-text document pulled out of a store: one measured column of monospaced type, a second column for a framed photograph, ASCII for the odd sign, dashed rules for panels, and nothing decorative a reader could not have typed. The reference is code.storage's spec-sheet register, adapted for reading rather than copied: 14px type on 24px leading and a 560px column instead of 12px/24px/500px.
 
-There are two grounds and no chromatic surface: white paper by day, near-black `#070707` by night. Colour is reserved for links, which are blue with a half-opacity underline, and for text selection, which is Klein blue, the colour the site was built on before this redesign. Everything else is ink, graphite, or hairline. The terminal is the grammar, not a costume: there is no prompt, no scanline, and no blinking cursor, and the one block caret beside the name is static.
+There are two grounds and no chromatic surface: white paper by day, near-black `#070707` by night. Colour is reserved for links, which are blue with a half-opacity underline, and for text selection, which is Klein blue, the colour the site was built on before this redesign. Everything else is ink, graphite, or hairline. The terminal is the grammar, not a costume: there is no prompt, no scanline, and no glow. The one exception is a gag rather than chrome: the name in the header is an editable line whose block caret blinks and doubles as a tiny shell.
 
 Hierarchy is built without size. Headings are the same 14px as body, set bold and uppercase, led by a muted `#` or `##` marker. Weight, case, spacing, and a 48px gap between sections do the work that scale does elsewhere.
 
@@ -131,20 +131,20 @@ A two-ground monochrome with a single functional blue and a Klein-blue selection
 **Character:** One mono face for everything, so the site reads as a single typed document. The face carries no arrows; use ASCII `->`, never `→` or `↗`, which would fall back to a system font.
 
 ### Hierarchy
-Every size is the 14px body multiplied by a whole power of 9/8 (1.125). Text smaller than body steps down one power at a time; text larger than body steps up two at a time (×1.266), so each jump between neighbouring roles is the same fraction. Sizes are tokens in `global.css` (`text-chip`, `text-label`, `text-body`, `text-lead`, `text-display`); never write a literal font size. Line heights sit on a 4px grid. Print is the exception: the CV prints on its own 8.5pt scale.
+Every size is the 14px body multiplied by a whole power of 9/8 (1.125), rounded to the nearest pixel. Text smaller than body steps down one power at a time; text larger than body steps up two at a time (×1.266), so each jump between neighbouring roles is the same fraction. Sizes and line heights are both `rem` tokens in `global.css` (`text-chip`, `text-label`, `text-body`, `text-lead`, `text-display`), so the whole scale grows uniformly with the reader's default font size; never write a literal font size. At the 16px browser default, line heights sit on a 4px grid. Print is the exception: the CV prints on its own 8.5pt scale.
 
 | Role | Power | Size / line |
 | --- | --- | --- |
-| Display | +4 | 22.43px / 32px |
-| Lead | +2 | 17.72px / 28px |
-| Body, headings | 0 | 14px / 24px |
-| Label | −1 | 12.44px / 20px |
-| Chip | −2 | 11.06px / 24px box |
+| Display | +4 | 1.375rem (22px) / 2rem (32px) |
+| Lead | +2 | 1.125rem (18px) / 1.75rem (28px) |
+| Body, headings | 0 | 0.875rem (14px) / 1.5rem (24px) |
+| Label | −1 | 0.75rem (12px) / 1.25rem (20px) |
+| Chip | −2 | 0.6875rem (11px) / 1.5rem (24px) box |
 
 - **Heading** (700, body size, uppercase): h1, h2, h3 are one size. The home h1 is the one exception at display size, and its lead paragraph is lead size. h1 gets a muted `# ` prefix and h2 a muted `## ` prefix via CSS; h3 has none. In a document (`.flow`, `.doc-prose`), the h1 is followed by 36px rather than 24px, and every h2 carries a dashed rule beneath it, the same treatment as the CV's section headings. On the printed CV, headings follow the 8.5pt body.
 - **Body** (400, 14px, 24px): All prose, about 66 characters per line at 560px.
-- **Label** (400–500, 12.44px, 20px, uppercase): Navigation, bracket links, footer, meta lines, ASCII blocks, inline code.
-- **Chip** (700, 11.06px, 24px box, uppercase): Inverted caption labels.
+- **Label** (400–500, 12px, 20px, uppercase): Navigation, bracket links, footer, meta lines, ASCII blocks, inline code.
+- **Chip** (700, 11px, 24px box, uppercase): Inverted caption labels.
 
 ### Named Rules
 **The No-Size-Jump Rule.** Never raise a heading's font size. Use weight, case, the prefix, and space.
@@ -171,10 +171,13 @@ Mostly square. Panels and code blocks use a 12px radius; the download button 8px
 ## Components
 
 ### Navigation
-A two-line brand block at left (name at lead size, bold, with a static `█` caret, then "Software engineer" at body size, muted) and a bracketed link row at right: `[ HOME / ABOUT / THOUGHTS / CV / CONTACT ]`, with the theme control beneath it. Label size, uppercase. The current page is bold with a half-opacity underline; hover shows the same underline. Links wrap naturally on narrow screens, so there is no disclosure menu and no menu script.
+A two-line brand block at left (name at lead size, bold, as an editable line with a blinking block caret, then "Software engineer" at body size, muted) and a bracketed link row at right: `[ HOME / ABOUT / THOUGHTS / CV / CONTACT ]`, with the theme control beneath it. Label size, uppercase. The current page is bold with a half-opacity underline; hover shows the same underline. Links wrap naturally on narrow screens, so there is no disclosure menu and no menu script.
 
 ### Theme Toggle
-A bracket text control that names the theme it will switch to (`[ DARK ]` or `[ LIGHT ]`). Both labels are in the markup and CSS shows one, so there is no flash. It is one of two client scripts, with the inline initialiser in `Layout.astro`; both are CSP-hashed by `scripts/sync-csp.mjs` at build.
+A bracket text control that names the theme it will switch to (`[ DARK ]` or `[ LIGHT ]`). Both labels are in the markup and CSS shows one, so there is no flash. Its script, the inline initialiser in `Layout.astro`, and the name shell's script are the site's client scripts; inline ones are CSP-hashed by `scripts/sync-csp.mjs` at build.
+
+### Name Shell
+The name is a real text field and the `█` is its cursor: it sits on the caret's cell, shows the character under it in inverse, blinks with a hard on/off step, holds steady while typing, and stops blinking under reduced motion. Idle, the name and tagline are uppercase; once something is typed, the line shows exactly what was typed. Enter runs the line through `src/lib/commands.ts` (`help`, `whoami`, `ls`, `cd <dir>`, `echo`, `status`, `sudo`, `rm`, `exit`, `clear`), and the lowercase reply borrows the tagline's line for four seconds. Leaving the field always restores the name. `status` prints `site.availability` from `src/lib/site.ts`. Without JavaScript the field is still editable, with the native caret.
 
 ### Links
 Blue, weight 500, underlined at 50% opacity with a 3px offset; hover raises the underline to full. Bracket links (`.bracket`) wrap the label in `[ ]` for primary actions such as "View CV" and "Back home".
@@ -210,5 +213,5 @@ Screen: the same document, with section headings (`## EXPERIENCE`) ruled by a da
 - **Don't** introduce a second typeface or a heading size jump.
 - **Don't** use `→`, `↗`, or emoji: Geist Mono has no glyph for them and they fall back to a system font. The one deliberate exception is the heart in the footer's "Built with" line.
 - **Don't** add an eyebrow or kicker above a heading.
-- **Don't** emulate a terminal: no prompt, scanlines, glow, or blinking cursor.
+- **Don't** emulate a terminal: no prompt, scanlines, or glow. The name shell is the one terminal gag; keep new ones inside it rather than adding chrome.
 - **Don't** add a menu script; the navigation wraps.
